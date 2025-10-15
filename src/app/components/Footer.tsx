@@ -3,7 +3,7 @@
 
 import React from "react";
 import { useTheme } from "../contexts/ThemeContext";
-import { Building, ExternalLink, Phone, Mail, MapPin } from "lucide-react";
+import { ExternalLink, Phone, Mail, MapPin } from "lucide-react";
 
 const Footer: React.FC = () => {
 	const { theme } = useTheme();
@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
 			className="py-16 border-t"
 			style={{
 				backgroundColor: theme.card,
-				borderColor: theme.border,
+				borderColor: theme.background,
 			}}>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Main Footer Content */}
@@ -61,8 +61,8 @@ const Footer: React.FC = () => {
 					<div className="lg:col-span-2">
 						<div className="flex items-center space-x-3 mb-6">
 							<div
-								className="p-2 rounded-lg flex items-center justify-center"
-								style={{ backgroundColor: theme.primary }}>
+								className="p-2 rounded-lg flex items-center justify-center border-2"
+								style={{ borderColor: theme.primary }}>
 								{/* Logo with fallback */}
 								<img
 									src="/logo_3d.png"

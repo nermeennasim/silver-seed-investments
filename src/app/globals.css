@@ -28,3 +28,19 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Hero carousel animation - 3 images, 30s cycle (each visible for 10s) */
+@keyframes fadeInOut {
+  0% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+  }
+  33.33% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}

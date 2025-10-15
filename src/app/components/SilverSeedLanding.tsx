@@ -8,11 +8,10 @@ import {
 	CheckCircle2,
 	Phone,
 	Mail,
-	MapPin,
 	MessageCircle,
 	Star,
-	Building,
 	Users,
+	Calendar,
 } from "lucide-react";
 import siteData from "@/data/seedData";
 import Navigation from "./Navigation";
@@ -87,26 +86,69 @@ const SilverSeedLanding: React.FC = () => {
 				scrollToSection={scrollToSection}
 			/>
 
-			{/* Hero Section */}
-			<section id="hero" className="pt-32 pb-20 px-4">
-				<div className="max-w-7xl mx-auto text-center">
+			{/* Hero Section with Carousel */}
+			<section
+				id="hero"
+				className="relative pt-32 pb-20 px-4 min-h-screen flex items-center overflow-hidden">
+				{/* Background Carousel - 3 Images */}
+				<div className="absolute inset-0">
+					{/* Image 1 - Cityscape */}
+					<div
+						className="absolute inset-0"
+						style={{
+							backgroundImage:
+								"url(https://kd-sip.ru/upload/iblock/597/5975d6da8f123f533aec0e17e27d2982.jpg)",
+							backgroundSize: "cover",
+							backgroundPosition: "center",
+							backgroundRepeat: "no-repeat",
+							animation: "fadeInOut 30s ease-in-out infinite",
+						}}
+					/>
+					{/* Image 2 - Modern Building Interior */}
+					<div
+						className="absolute inset-0"
+						style={{
+							backgroundImage:
+								"url(https://cf.bstatic.com/xdata/images/hotel/max1024x768/195028675.jpg?k=19059db510b8e9cd9bcd7219b1cb96645e28445fb5379d0a937549231c7a86dd&o=&hp=1)",
+							backgroundSize: "cover",
+							backgroundPosition: "center",
+							backgroundRepeat: "no-repeat",
+							animation: "fadeInOut 30s ease-in-out infinite 10s",
+						}}
+					/>
+					{/* Image 3 - Luxury Property */}
+					<div
+						className="absolute inset-0"
+						style={{
+							backgroundImage:
+								"url(https://i.pinimg.com/originals/01/e8/00/01e800a02b3d28ba18e59e21b1c6c082.jpg)",
+							backgroundSize: "cover",
+							backgroundPosition: "center",
+							backgroundRepeat: "no-repeat",
+							animation: "fadeInOut 30s ease-in-out infinite 20s",
+						}}
+					/>
+				</div>
+
+				{/* Teal overlay for better text readability */}
+				<div
+					className="absolute inset-0"
+					style={{
+						background: `linear-gradient(135deg, rgba(3, 167, 145, 0.85), rgba(3, 167, 145, 0.75))`,
+						backdropFilter: "blur(1px)",
+					}}
+				/>
+
+				{/* Content */}
+				<div className="max-w-7xl mx-auto text-center relative z-10">
 					<motion.div {...fadeInUp}>
-						<div className="flex justify-center mb-8">
-							<div
-								className="p-6 rounded-3xl shadow-2xl"
-								style={{
-									background: `linear-gradient(135deg, ${theme.primary}, ${theme.accent})`,
-								}}>
-								<Building className="h-20 w-20" style={{ color: "#ffffff" }} />
-							</div>
-						</div>
-						<h1 className="text-5xl md:text-7xl font-bold mb-6">
+						<h1 className="text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-2xl">
 							{siteData.hero.title}
 						</h1>
-						<p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+						<p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-white drop-shadow-lg">
 							{siteData.hero.subtitle}
 						</p>
-						<p className="text-lg mb-12 max-w-2xl mx-auto">
+						<p className="text-lg mb-12 max-w-2xl mx-auto text-white/95 drop-shadow-lg">
 							{siteData.hero.description}
 						</p>
 
@@ -114,16 +156,16 @@ const SilverSeedLanding: React.FC = () => {
 							{siteData.hero.highlights.map((highlight, index) => (
 								<div
 									key={index}
-									className="rounded-xl p-4 border-2"
+									className="rounded-xl p-4 border-2 backdrop-blur-md shadow-lg"
 									style={{
-										backgroundColor: theme.card,
+										backgroundColor: "rgba(26, 31, 58, 0.85)",
 										borderColor: theme.primary,
 									}}>
 									<CheckCircle2
 										className="h-6 w-6 mb-2 mx-auto"
 										style={{ color: theme.primary }}
 									/>
-									<p className="text-sm font-medium">{highlight}</p>
+									<p className="text-sm font-medium text-white">{highlight}</p>
 								</div>
 							))}
 						</div>
@@ -131,15 +173,36 @@ const SilverSeedLanding: React.FC = () => {
 						<div className="flex flex-col sm:flex-row gap-4 justify-center">
 							<button
 								onClick={() => scrollToSection("services")}
-								className="px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:scale-105"
-								style={{ backgroundColor: theme.primary, color: "#ffffff" }}>
+								className="px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:scale-105 shadow-2xl"
+								style={{ backgroundColor: theme.primary, color: "#ffffff" }}
+								onMouseEnter={(e) => {
+									e.currentTarget.style.boxShadow = `0 10px 30px ${theme.primary}60`;
+								}}
+								onMouseLeave={(e) => {
+									e.currentTarget.style.boxShadow =
+										"0 8px 20px rgba(0,0,0,0.3)";
+								}}>
 								{siteData.hero.cta.primary.text}
 								<ArrowRight className="inline-block ml-2 h-5 w-5" />
 							</button>
 							<button
 								onClick={() => scrollToSection("contact")}
-								className="px-8 py-4 rounded-xl font-semibold text-lg border-2 transition-all hover:scale-105"
-								style={{ borderColor: theme.primary, color: theme.primary }}>
+								className="px-8 py-4 rounded-xl font-semibold text-lg border-2 transition-all hover:scale-105 backdrop-blur-md shadow-2xl"
+								style={{
+									borderColor: theme.primary,
+									color: "#ffffff",
+									backgroundColor: "rgba(26, 31, 58, 0.6)",
+								}}
+								onMouseEnter={(e) => {
+									e.currentTarget.style.backgroundColor =
+										"rgba(26, 31, 58, 0.9)";
+									e.currentTarget.style.borderColor = theme.accent;
+								}}
+								onMouseLeave={(e) => {
+									e.currentTarget.style.backgroundColor =
+										"rgba(26, 31, 58, 0.6)";
+									e.currentTarget.style.borderColor = theme.primary;
+								}}>
 								{siteData.hero.cta.secondary.text}
 							</button>
 						</div>
@@ -176,7 +239,7 @@ const SilverSeedLanding: React.FC = () => {
 								borderLeft: `4px solid ${theme.primary}`,
 							}}>
 							<blockquote className="text-2xl font-semibold italic mb-4">
-								"{siteData.about.quote.text}"
+								&ldquo;{siteData.about.quote.text}&rdquo;
 							</blockquote>
 							<p>— {siteData.about.quote.author}</p>
 						</div>
@@ -223,7 +286,7 @@ const SilverSeedLanding: React.FC = () => {
 					</motion.div>
 
 					<div className="space-y-8">
-						{siteData.howWeWork.steps.map((step, index) => {
+						{siteData.howWeWork.steps.map((step) => {
 							const Icon = step.icon;
 							return (
 								<div
@@ -406,37 +469,151 @@ const SilverSeedLanding: React.FC = () => {
 						})}
 					</div>
 
-					{/* ROI Trend Chart */}
+					{/* ROI Trend Chart - Enhanced Bar Chart */}
 					<div
-						className="rounded-2xl p-8"
+						className="rounded-2xl p-8 md:p-12"
 						style={{
 							backgroundColor: theme.card,
-							border: `1px solid ${theme.border}`,
+							border: `2px solid ${theme.border}`,
 						}}>
-						<h3 className="text-2xl font-bold mb-8 text-center">
-							{siteData.roiCaseStudies.roiTrend.title}
-						</h3>
+						<div className="text-center mb-12">
+							<h3 className="text-3xl font-bold mb-3">
+								{siteData.roiCaseStudies.roiTrend.title}
+							</h3>
+							<p className="text-lg" style={{ color: theme.mutedForeground }}>
+								Consistent growth from 20% to 37% ROI
+							</p>
+						</div>
 
-						<div className="flex items-end justify-between gap-4 h-64">
-							{siteData.roiCaseStudies.roiTrend.data.map((item) => (
-								<div
-									key={item.year}
-									className="flex-1 flex flex-col items-center justify-end">
+						{/* Chart Container */}
+						<div className="relative">
+							{/* Y-axis labels */}
+							<div
+								className="absolute left-0 top-0 bottom-12 flex flex-col justify-between text-sm font-medium pr-4"
+								style={{ color: theme.mutedForeground }}>
+								<span>40%</span>
+								<span>30%</span>
+								<span>20%</span>
+								<span>10%</span>
+								<span>0%</span>
+							</div>
+
+							{/* Grid lines */}
+							<div className="absolute left-16 right-0 top-0 bottom-12 flex flex-col justify-between">
+								{[...Array(5)].map((_, i) => (
 									<div
-										className="text-2xl font-bold mb-2"
-										style={{ color: theme.primary }}>
-										{item.roi}%
-									</div>
-									<div
-										className="w-full rounded-t-lg"
-										style={{
-											height: `${(item.roi / 40) * 100}%`,
-											background: `linear-gradient(to top, ${theme.primary}, ${theme.accent})`,
-										}}
+										key={i}
+										className="w-full h-px"
+										style={{ backgroundColor: theme.border }}
 									/>
-									<div className="text-sm font-semibold mt-3">{item.year}</div>
+								))}
+							</div>
+
+							{/* Bars */}
+							<div className="flex items-end justify-between gap-4 h-80 ml-16 relative">
+								{siteData.roiCaseStudies.roiTrend.data.map((item, index) => {
+									const prevRoi =
+										index > 0
+											? siteData.roiCaseStudies.roiTrend.data[index - 1].roi
+											: item.roi;
+									const growth = item.roi - prevRoi;
+
+									return (
+										<div
+											key={item.year}
+											className="flex-1 flex flex-col items-center justify-end group">
+											{/* Growth indicator */}
+											{index > 0 && (
+												<div
+													className="text-xs font-semibold mb-1 px-2 py-1 rounded-full"
+													style={{
+														backgroundColor: theme.primary + "20",
+														color: theme.primary,
+													}}>
+													+{growth}%
+												</div>
+											)}
+
+											{/* ROI Value */}
+											<div
+												className="text-2xl md:text-3xl font-bold mb-3 transition-all group-hover:scale-110"
+												style={{ color: theme.primary }}>
+												{item.roi}%
+											</div>
+
+											{/* Bar */}
+											<div
+												className="w-full rounded-t-xl transition-all duration-500 group-hover:opacity-90 relative overflow-hidden shadow-lg"
+												style={{
+													height: `${(item.roi / 40) * 100}%`,
+													background: `linear-gradient(to top, ${theme.primary}, ${theme.accent})`,
+													minHeight: "40px",
+												}}>
+												{/* Animated shine effect */}
+												<div
+													className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+													style={{
+														background:
+															"linear-gradient(to top, transparent, rgba(255,255,255,0.2))",
+													}}
+												/>
+											</div>
+
+											{/* Year label */}
+											<div
+												className="text-base md:text-lg font-bold mt-4 px-3 py-2 rounded-lg transition-all group-hover:scale-105"
+												style={{
+													color: theme.foreground,
+													backgroundColor: theme.background + "60",
+												}}>
+												{item.year}
+											</div>
+										</div>
+									);
+								})}
+							</div>
+						</div>
+
+						{/* Summary Stats */}
+						<div
+							className="grid grid-cols-3 gap-4 mt-12 pt-8 border-t"
+							style={{ borderColor: theme.border }}>
+							<div className="text-center">
+								<div
+									className="text-sm mb-1"
+									style={{ color: theme.mutedForeground }}>
+									Starting ROI
 								</div>
-							))}
+								<div
+									className="text-2xl font-bold"
+									style={{ color: theme.accent }}>
+									20%
+								</div>
+							</div>
+							<div className="text-center">
+								<div
+									className="text-sm mb-1"
+									style={{ color: theme.mutedForeground }}>
+									Total Growth
+								</div>
+								<div
+									className="text-2xl font-bold"
+									style={{ color: theme.primary }}>
+									+17%
+								</div>
+							</div>
+							<div className="text-center">
+								<div
+									className="text-sm mb-1"
+									style={{ color: theme.mutedForeground }}>
+									Current ROI
+								</div>
+								<div
+									className="text-2xl font-bold"
+									style={{ color: theme.primary }}>
+									37%
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -808,7 +985,7 @@ const SilverSeedLanding: React.FC = () => {
 									))}
 								</div>
 								<blockquote className="text-lg italic mb-6">
-									"{review.quote}"
+									&ldquo;{review.quote}&rdquo;
 								</blockquote>
 
 								<div className="flex items-center gap-4 mb-4">
@@ -1082,173 +1259,146 @@ const SilverSeedLanding: React.FC = () => {
 				<div className="max-w-7xl mx-auto">
 					<motion.div className="text-center mb-16" {...fadeInUp}>
 						<h2 className="text-4xl md:text-5xl font-bold mb-4">
-							{siteData.contact.title}
+							Get In Touch
 						</h2>
 						<p className="text-xl max-w-3xl mx-auto mb-4">
-							{siteData.contact.subtitle}
+							Ready to start your real estate investment journey?
 						</p>
 						<p className="text-lg max-w-2xl mx-auto">
-							{siteData.contact.ctaMessage}
+							Contact us today to discuss your investment goals and discover how
+							we can help you build wealth through real estate.
 						</p>
 					</motion.div>
 
-					<div className="grid md:grid-cols-2 gap-12">
-						{/* Contact Methods */}
-						<div>
-							<h3 className="text-2xl font-bold mb-6">Get In Touch</h3>
+					<div className="max-w-4xl mx-auto">
+						{/* Contact Methods Grid */}
+						<div className="grid md:grid-cols-3 gap-6 mb-12">
+							{/* Phone */}
+							<a
+								href="tel:+14379841806"
+								className="flex flex-col items-center text-center p-8 rounded-2xl hover:scale-105 transition-all group"
+								style={{
+									backgroundColor: theme.card,
+									border: `2px solid ${theme.border}`,
+								}}>
+								<div
+									className="p-4 rounded-full mb-4 group-hover:scale-110 transition-all"
+									style={{
+										backgroundColor: theme.primary + "20",
+										border: `2px solid ${theme.primary}`,
+									}}>
+									<Phone className="h-8 w-8" style={{ color: theme.primary }} />
+								</div>
+								<div
+									className="text-sm font-semibold mb-2"
+									style={{ color: theme.mutedForeground }}>
+									Call Us
+								</div>
+								<div className="text-lg font-bold">+1-437-984-1806</div>
+							</a>
 
-							<div className="space-y-4">
-								{siteData.contact.methods
-									.filter((method) => method.primary)
-									.map((method) => {
-										const IconComponent =
-											method.type === "phone"
-												? Phone
-												: method.type === "whatsapp"
-												? MessageCircle
-												: method.type === "email"
-												? Mail
-												: MapPin;
+							{/* WhatsApp */}
+							<a
+								href="https://wa.me/966596237616"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="flex flex-col items-center text-center p-8 rounded-2xl hover:scale-105 transition-all group"
+								style={{
+									backgroundColor: theme.card,
+									border: `2px solid ${theme.border}`,
+								}}>
+								<div
+									className="p-4 rounded-full mb-4 group-hover:scale-110 transition-all"
+									style={{
+										backgroundColor: theme.accent + "20",
+										border: `2px solid ${theme.accent}`,
+									}}>
+									<MessageCircle
+										className="h-8 w-8"
+										style={{ color: theme.accent }}
+									/>
+								</div>
+								<div
+									className="text-sm font-semibold mb-2"
+									style={{ color: theme.mutedForeground }}>
+									WhatsApp
+								</div>
+								<div className="text-lg font-bold">+966-596-237-616</div>
+							</a>
 
-										return (
-											<a
-												key={method.type}
-												href={method.link}
-												target={
-													method.type === "whatsapp" ? "_blank" : undefined
-												}
-												rel="noopener noreferrer"
-												className="flex items-center gap-4 p-4 rounded-xl hover:scale-105 transition-all"
-												style={{
-													backgroundColor: theme.card,
-													border: `1px solid ${theme.border}`,
-												}}>
-												<div
-													className="p-3 rounded-lg"
-													style={{ backgroundColor: theme.primary + "20" }}>
-													<IconComponent
-														className="h-6 w-6"
-														style={{ color: theme.primary }}
-													/>
-												</div>
-												<div>
-													<div className="text-sm font-semibold">
-														{method.label}
-													</div>
-													<div className="font-semibold">{method.value}</div>
-												</div>
-											</a>
-										);
-									})}
-							</div>
-
-							<div className="mt-8">
-								<h4 className="text-lg font-bold mb-4">Visit Us</h4>
-								{siteData.contact.methods
-									.filter((method) => method.type === "address")
-									.map((method) => (
-										<a
-											key={method.type}
-											href={method.link}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="flex items-start gap-4 p-4 rounded-xl hover:scale-105 transition-all"
-											style={{
-												backgroundColor: theme.card,
-												border: `1px solid ${theme.border}`,
-											}}>
-											<MapPin
-												className="h-6 w-6 flex-shrink-0"
-												style={{ color: theme.primary }}
-											/>
-											<div>
-												<div className="text-sm font-semibold mb-1">
-													Office Location
-												</div>
-												<div>{method.value}</div>
-											</div>
-										</a>
-									))}
-							</div>
+							{/* Email */}
+							<a
+								href="mailto:administration@silverseedinv.com"
+								className="flex flex-col items-center text-center p-8 rounded-2xl hover:scale-105 transition-all group"
+								style={{
+									backgroundColor: theme.card,
+									border: `2px solid ${theme.border}`,
+								}}>
+								<div
+									className="p-4 rounded-full mb-4 group-hover:scale-110 transition-all"
+									style={{
+										backgroundColor: theme.warning + "20",
+										border: `2px solid ${theme.warning}`,
+									}}>
+									<Mail className="h-8 w-8" style={{ color: theme.warning }} />
+								</div>
+								<div
+									className="text-sm font-semibold mb-2"
+									style={{ color: theme.mutedForeground }}>
+									Email Us
+								</div>
+								<div className="text-lg font-bold break-all">
+									administration@silverseedinv.com
+								</div>
+							</a>
 						</div>
 
-						{/* Contact Form */}
+						{/* Schedule a Call CTA */}
 						<div
-							className="rounded-2xl p-8"
+							className="rounded-2xl p-12 text-center"
 							style={{
-								backgroundColor: theme.card,
-								border: `1px solid ${theme.border}`,
+								background: `linear-gradient(135deg, ${theme.primary}20, ${theme.accent}20)`,
+								border: `2px solid ${theme.primary}`,
 							}}>
-							<h3 className="text-2xl font-bold mb-6">
-								{siteData.contact.form.title}
+							<div
+								className="inline-flex p-4 rounded-full mb-6"
+								style={{ backgroundColor: theme.primary }}>
+								<Calendar className="h-12 w-12" style={{ color: "#ffffff" }} />
+							</div>
+
+							<h3 className="text-3xl font-bold mb-4">
+								Schedule a Free Consultation
 							</h3>
+							<p
+								className="text-lg mb-8 max-w-2xl mx-auto"
+								style={{ color: theme.mutedForeground }}>
+								Book a 30-minute call with our investment experts to discuss
+								your goals and explore opportunities.
+							</p>
 
-							<form className="space-y-4">
-								{siteData.contact.form.fields.map((field) => (
-									<div key={field.name}>
-										<label className="block text-sm font-semibold mb-2">
-											{field.label}
-											{field.required && (
-												<span style={{ color: theme.destructive }}> *</span>
-											)}
-										</label>
-										{field.type === "textarea" ? (
-											<textarea
-												name={field.name}
-												required={field.required}
-												rows={4}
-												className="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
-												style={{
-													backgroundColor: theme.background,
-													borderColor: theme.border,
-													color: theme.foreground,
-												}}
-											/>
-										) : field.type === "select" ? (
-											<select
-												name={field.name}
-												required={field.required}
-												className="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
-												style={{
-													backgroundColor: theme.background,
-													borderColor: theme.border,
-													color: theme.foreground,
-												}}>
-												<option value="">Select amount</option>
-												{field.options?.map((option) => (
-													<option key={option} value={option}>
-														{option}
-													</option>
-												))}
-											</select>
-										) : (
-											<input
-												type={field.type}
-												name={field.name}
-												required={field.required}
-												className="w-full px-4 py-3 rounded-lg border-2 focus:outline-none"
-												style={{
-													backgroundColor: theme.background,
-													borderColor: theme.border,
-													color: theme.foreground,
-												}}
-											/>
-										)}
-									</div>
-								))}
+							<a
+								href="https://calendly.com/silverseedinvestments"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-flex items-center gap-3 px-10 py-5 rounded-xl font-bold text-xl transition-all hover:scale-105 shadow-2xl"
+								style={{ backgroundColor: theme.primary, color: "#ffffff" }}
+								onMouseEnter={(e) => {
+									e.currentTarget.style.boxShadow = `0 15px 40px ${theme.primary}60`;
+								}}
+								onMouseLeave={(e) => {
+									e.currentTarget.style.boxShadow =
+										"0 8px 20px rgba(0,0,0,0.3)";
+								}}>
+								<Calendar className="h-6 w-6" />
+								Book Your Call Now
+								<ArrowRight className="h-6 w-6" />
+							</a>
 
-								<button
-									type="submit"
-									className="w-full px-6 py-4 rounded-lg font-semibold text-lg transition-all hover:scale-105 hover:shadow-xl"
-									style={{ backgroundColor: theme.primary, color: "#ffffff" }}>
-									{siteData.contact.form.submitText}
-									<ArrowRight className="inline-block ml-2 h-5 w-5" />
-								</button>
-
-								<p className="text-sm text-center">
-									We'll respond within 24 hours
-								</p>
-							</form>
+							<p
+								className="text-sm mt-6"
+								style={{ color: theme.mutedForeground }}>
+								Available Monday - Friday, 9 AM - 6 PM EST
+							</p>
 						</div>
 					</div>
 				</div>

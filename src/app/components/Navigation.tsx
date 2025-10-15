@@ -3,7 +3,7 @@
 
 import React, { useState } from "react";
 import { useTheme } from "../contexts/ThemeContext";
-import { Menu, X, Building } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 interface NavigationProps {
 	activeSection: string;
