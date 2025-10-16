@@ -33,7 +33,7 @@ export const siteData = {
     contact: {
       phone: "+1-437-984-1806",
       whatsapp: "+966-596-237-616", 
-      email: "administration@silverseedinv.com",
+      email: "admin@silverseedinv.com",
       website: "www.SilverSeedInv.com",
       address: "6894, Barrisdale Drive, Mississauga, Ontario"
     },
@@ -841,11 +841,11 @@ export const siteData = {
     reviews: [
       {
         id: 1,
-        name: "Sarah Johnson",
+        name: "Hannah Larson",
         location: "Toronto, Canada",
         role: "Real Estate Investor",
         rating: 5,
-        image: "/testimonials/client-1.jpg",
+        image: "/testimonials/client-2.jpg",
         quote: "SSI transformed my approach to real estate investing. Their transparency and hands-on management give me complete peace of mind.",
         investment: "Multiple properties",
         roi: "32% average ROI"
@@ -856,7 +856,7 @@ export const siteData = {
         location: "Dubai, UAE",
         role: "Business Owner",
         rating: 5,
-        image: "/testimonials/client-2.jpg",
+        image: "https://templatekit.jegtheme.com/cloudsion/wp-content/uploads/sites/383/2023/06/young-stylish-smiling-man-in-co-working-office-startup-freelancer-holding-using-tablet-e1686130822230.jpg",
         quote: "The skin-in-the-game approach means SSI's success is tied to mine. I've never felt more confident about my investments.",
         investment: "Rental portfolio",
         roi: "27% annualized"
@@ -1069,8 +1069,8 @@ export const siteData = {
         type: "email",
         icon: "Mail",
         label: "Email",
-        value: "administration@silverseedinv.com",
-        link: "mailto:administration@silverseedinv.com",
+        value: "admin@silverseedinv.com",
+        link: "mailto:admin@silverseedinv.com",
         primary: true
       },
       {

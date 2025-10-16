@@ -13,6 +13,17 @@ import {
 	Users,
 	Calendar,
 } from "lucide-react";
+import {
+	BarChart,
+	Bar,
+	XAxis,
+	YAxis,
+	CartesianGrid,
+	Tooltip,
+	ResponsiveContainer,
+	Cell,
+	LabelList,
+} from "recharts";
 import siteData from "@/data/seedData";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
@@ -216,45 +227,92 @@ const SilverSeedLanding: React.FC = () => {
 				className="py-20 px-4"
 				style={{ backgroundColor: theme.muted }}>
 				<div className="max-w-7xl mx-auto">
-					<motion.div className="text-center mb-16" {...fadeInUp}>
-						<h2 className="text-4xl md:text-5xl font-bold mb-4">
-							{siteData.about.title}
-						</h2>
-						<p className="text-xl max-w-3xl mx-auto">
-							{siteData.about.subtitle}
-						</p>
+					{/* Title and Image Row */}
+					<div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+						{/* Left: About Us Title */}
+						<motion.div {...fadeInUp}>
+							<h2 className="text-5xl md:text-6xl font-bold mb-6">
+								{siteData.about.title}
+							</h2>
+							<p className="text-xl leading-relaxed">
+								{siteData.about.subtitle}
+							</p>
+						</motion.div>
+
+						{/* Right: Rounded Image */}
+						<motion.div
+							{...fadeInUp}
+							className="rounded-3xl overflow-hidden h-[350px] md:h-[400px]"
+							style={{
+								boxShadow: `0 10px 40px ${theme.primary}40`,
+							}}>
+							<img
+								src="/about_us_section_bg.jpg"
+								alt="Silver Seed Investment - About Us"
+								className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+							/>
+						</motion.div>
+					</div>
+
+					{/* Quotation Section */}
+					<motion.div
+						{...fadeInUp}
+						className="rounded-3xl p-8 md:p-12 mb-16 relative overflow-hidden"
+						style={{
+							backgroundColor: theme.card,
+							border: `2px solid ${theme.primary}20`,
+						}}>
+						<div
+							className="absolute top-0 left-0 w-2 h-full"
+							style={{ backgroundColor: theme.primary }}
+						/>
+						<div className="max-w-4xl mx-auto text-center">
+							<div
+								className="text-7xl md:text-8xl mb-6 leading-none"
+								style={{ color: theme.primary, opacity: 0.2 }}>
+								"
+							</div>
+							<blockquote className="text-2xl md:text-3xl font-semibold italic mb-8 leading-relaxed">
+								{siteData.about.quote.text}
+							</blockquote>
+							<p
+								className="text-xl font-bold tracking-wide"
+								style={{ color: theme.primary }}>
+								— {siteData.about.quote.author}
+							</p>
+						</div>
 					</motion.div>
 
-					<div className="grid md:grid-cols-2 gap-12 mb-16">
-						<div>
-							<h3 className="text-2xl font-bold mb-4">Our Mission</h3>
-							<p className="text-lg mb-6">{siteData.about.mission}</p>
-							<p className="text-lg">{siteData.about.philosophy}</p>
-						</div>
-
-						<div
-							className="rounded-2xl p-8"
-							style={{
-								backgroundColor: theme.card,
-								borderLeft: `4px solid ${theme.primary}`,
-							}}>
-							<blockquote className="text-2xl font-semibold italic mb-4">
-								&ldquo;{siteData.about.quote.text}&rdquo;
-							</blockquote>
-							<p>— {siteData.about.quote.author}</p>
+					{/* Description Section */}
+					<div className="mb-16">
+						<div className="grid md:grid-cols-2 gap-12">
+							<motion.div {...fadeInUp}>
+								<h3 className="text-3xl font-bold mb-6">Our Mission</h3>
+								<p className="text-lg leading-relaxed">
+									{siteData.about.mission}
+								</p>
+							</motion.div>
+							<motion.div {...fadeInUp}>
+								<h3 className="text-3xl font-bold mb-6">Our Philosophy</h3>
+								<p className="text-lg leading-relaxed">
+									{siteData.about.philosophy}
+								</p>
+							</motion.div>
 						</div>
 					</div>
 
+					{/* Unique Value Cards */}
 					<div className="grid md:grid-cols-3 gap-8">
 						{siteData.about.uniqueValue.map((value) => {
 							const Icon = value.icon;
 							return (
-								<div
+								<motion.div
 									key={value.title}
-									className="rounded-2xl p-6 text-center"
+									{...fadeInUp}
+									className="rounded-2xl p-6 text-center hover:scale-105 transition-all"
 									style={{
 										backgroundColor: theme.card,
-										border: `1px solid ${theme.border}`,
+										border: `2px solid ${theme.border}`,
 									}}>
 									<div
 										className="inline-flex p-4 rounded-xl mb-4"
@@ -266,7 +324,7 @@ const SilverSeedLanding: React.FC = () => {
 									</div>
 									<h4 className="text-xl font-bold mb-3">{value.title}</h4>
 									<p>{value.description}</p>
-								</div>
+								</motion.div>
 							);
 						})}
 					</div>
@@ -345,9 +403,24 @@ const SilverSeedLanding: React.FC = () => {
 			{/* Services Section */}
 			<section
 				id="services"
-				className="py-20 px-4"
-				style={{ backgroundColor: theme.muted }}>
-				<div className="max-w-7xl mx-auto">
+				className="py-20 px-4 relative overflow-hidden"
+				style={{
+					backgroundImage:
+						"url('https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1MqVJW.img?w=940&h=705&m=4&q=68')",
+					backgroundSize: "cover",
+					backgroundPosition: "center",
+					backgroundAttachment: "fixed",
+				}}>
+				{/* Light Green Overlay */}
+				<div
+					className="absolute inset-0"
+					style={{
+						background: `linear-gradient(135deg, ${theme.accent}F5, #E9F5BEEF)`,
+					}}
+				/>
+
+				{/* Content */}
+				<div className="max-w-7xl mx-auto relative z-10">
 					<motion.div className="text-center mb-16" {...fadeInUp}>
 						<h2 className="text-4xl md:text-5xl font-bold mb-4">
 							{siteData.services.title}
@@ -364,16 +437,21 @@ const SilverSeedLanding: React.FC = () => {
 						{siteData.services.offerings.map((service) => {
 							const Icon = service.icon;
 							return (
-								<div
+								<motion.div
 									key={service.id}
-									className="rounded-2xl p-6 hover:shadow-xl transition-all"
+									{...fadeInUp}
+									className="rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-all backdrop-blur-sm"
 									style={{
-										backgroundColor: theme.card,
-										border: `2px solid ${theme.border}`,
+										backgroundColor: "rgba(255, 255, 255, 0.95)",
+										border: `2px solid ${theme.primary}30`,
+										boxShadow: `0 4px 20px rgba(0,0,0,0.15)`,
 									}}>
 									<div
 										className="inline-flex p-4 rounded-xl mb-4"
-										style={{ backgroundColor: theme.primary + "20" }}>
+										style={{
+											backgroundColor: theme.primary + "20",
+											boxShadow: `0 4px 12px ${theme.primary}30`,
+										}}>
 										<Icon
 											className="h-8 w-8"
 											style={{ color: theme.primary }}
@@ -403,7 +481,7 @@ const SilverSeedLanding: React.FC = () => {
 										{service.highlight}
 									</div>
 									<p className="text-sm mt-3 italic">{service.savings}</p>
-								</div>
+								</motion.div>
 							);
 						})}
 					</div>
@@ -469,147 +547,155 @@ const SilverSeedLanding: React.FC = () => {
 						})}
 					</div>
 
-					{/* ROI Trend Chart - Enhanced Bar Chart */}
+					{/* ROI Trend Chart - Recharts Implementation */}
 					<div
-						className="rounded-2xl p-8 md:p-12"
+						className="rounded-2xl p-6 md:p-12"
 						style={{
 							backgroundColor: theme.card,
 							border: `2px solid ${theme.border}`,
 						}}>
-						<div className="text-center mb-12">
-							<h3 className="text-3xl font-bold mb-3">
+						<div className="text-center mb-8 md:mb-12">
+							<h3 className="text-2xl md:text-3xl font-bold mb-3">
 								{siteData.roiCaseStudies.roiTrend.title}
 							</h3>
-							<p className="text-lg" style={{ color: theme.mutedForeground }}>
+							<p
+								className="text-base md:text-lg"
+								style={{ color: theme.mutedForeground }}>
 								Consistent growth from 20% to 37% ROI
 							</p>
 						</div>
 
-						{/* Chart Container */}
-						<div className="relative">
-							{/* Y-axis labels */}
-							<div
-								className="absolute left-0 top-0 bottom-12 flex flex-col justify-between text-sm font-medium pr-4"
-								style={{ color: theme.mutedForeground }}>
-								<span>40%</span>
-								<span>30%</span>
-								<span>20%</span>
-								<span>10%</span>
-								<span>0%</span>
-							</div>
-
-							{/* Grid lines */}
-							<div className="absolute left-16 right-0 top-0 bottom-12 flex flex-col justify-between">
-								{[...Array(5)].map((_, i) => (
-									<div
-										key={i}
-										className="w-full h-px"
-										style={{ backgroundColor: theme.border }}
+						{/* Recharts Bar Chart */}
+						<div className="w-full h-[300px] md:h-[400px]">
+							<ResponsiveContainer width="100%" height="100%">
+								<BarChart
+									data={siteData.roiCaseStudies.roiTrend.data}
+									margin={{ top: 20, right: 20, left: 0, bottom: 20 }}>
+									<CartesianGrid
+										strokeDasharray="3 3"
+										stroke={theme.border}
+										opacity={0.3}
 									/>
-								))}
-							</div>
-
-							{/* Bars */}
-							<div className="flex items-end justify-between gap-4 h-80 ml-16 relative">
-								{siteData.roiCaseStudies.roiTrend.data.map((item, index) => {
-									const prevRoi =
-										index > 0
-											? siteData.roiCaseStudies.roiTrend.data[index - 1].roi
-											: item.roi;
-									const growth = item.roi - prevRoi;
-
-									return (
-										<div
-											key={item.year}
-											className="flex-1 flex flex-col items-center justify-end group">
-											{/* Growth indicator */}
-											{index > 0 && (
-												<div
-													className="text-xs font-semibold mb-1 px-2 py-1 rounded-full"
-													style={{
-														backgroundColor: theme.primary + "20",
-														color: theme.primary,
-													}}>
-													+{growth}%
-												</div>
-											)}
-
-											{/* ROI Value */}
-											<div
-												className="text-2xl md:text-3xl font-bold mb-3 transition-all group-hover:scale-110"
-												style={{ color: theme.primary }}>
-												{item.roi}%
-											</div>
-
-											{/* Bar */}
-											<div
-												className="w-full rounded-t-xl transition-all duration-500 group-hover:opacity-90 relative overflow-hidden shadow-lg"
-												style={{
-													height: `${(item.roi / 40) * 100}%`,
-													background: `linear-gradient(to top, ${theme.primary}, ${theme.accent})`,
-													minHeight: "40px",
-												}}>
-												{/* Animated shine effect */}
-												<div
-													className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-													style={{
-														background:
-															"linear-gradient(to top, transparent, rgba(255,255,255,0.2))",
-													}}
+									<XAxis
+										dataKey="year"
+										tick={{ fill: theme.foreground, fontSize: 14 }}
+										tickLine={{ stroke: theme.border }}
+										axisLine={{ stroke: theme.border }}
+									/>
+									<YAxis
+										domain={[0, 40]}
+										ticks={[0, 10, 20, 30, 40]}
+										tick={{ fill: theme.mutedForeground, fontSize: 12 }}
+										tickLine={{ stroke: theme.border }}
+										axisLine={{ stroke: theme.border }}
+										label={{
+											value: "ROI (%)",
+											angle: -90,
+											position: "insideLeft",
+											style: {
+												fill: theme.mutedForeground,
+												fontSize: 14,
+												fontWeight: 600,
+											},
+										}}
+									/>
+									<Tooltip
+										contentStyle={{
+											backgroundColor: theme.card,
+											border: `2px solid ${theme.primary}`,
+											borderRadius: "12px",
+											boxShadow: `0 4px 20px ${theme.primary}40`,
+										}}
+										labelStyle={{ color: theme.foreground, fontWeight: 600 }}
+										itemStyle={{ color: theme.primary, fontWeight: 700 }}
+										formatter={(value: any) => [`${value}%`, "ROI"]}
+									/>
+									<Bar
+										dataKey="roi"
+										fill={theme.primary}
+										radius={[12, 12, 0, 0]}
+										animationDuration={1000}>
+										{siteData.roiCaseStudies.roiTrend.data.map(
+											(entry, index) => (
+												<Cell
+													key={`cell-${index}`}
+													fill={`url(#gradient-${index})`}
 												/>
-											</div>
-
-											{/* Year label */}
-											<div
-												className="text-base md:text-lg font-bold mt-4 px-3 py-2 rounded-lg transition-all group-hover:scale-105"
-												style={{
-													color: theme.foreground,
-													backgroundColor: theme.background + "60",
-												}}>
-												{item.year}
-											</div>
-										</div>
-									);
-								})}
-							</div>
+											)
+										)}
+										<LabelList
+											dataKey="roi"
+											position="top"
+											formatter={(value: any) => `${value}%`}
+											style={{
+												fill: theme.primary,
+												fontWeight: 700,
+												fontSize: 16,
+											}}
+										/>
+									</Bar>
+									<defs>
+										{siteData.roiCaseStudies.roiTrend.data.map((_, index) => (
+											<linearGradient
+												key={`gradient-${index}`}
+												id={`gradient-${index}`}
+												x1="0"
+												y1="0"
+												x2="0"
+												y2="1">
+												<stop
+													offset="0%"
+													stopColor={theme.accent}
+													stopOpacity={1}
+												/>
+												<stop
+													offset="100%"
+													stopColor={theme.primary}
+													stopOpacity={1}
+												/>
+											</linearGradient>
+										))}
+									</defs>
+								</BarChart>
+							</ResponsiveContainer>
 						</div>
 
 						{/* Summary Stats */}
 						<div
-							className="grid grid-cols-3 gap-4 mt-12 pt-8 border-t"
+							className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-12 pt-6 md:pt-8 border-t"
 							style={{ borderColor: theme.border }}>
-							<div className="text-center">
+							<div className="text-center p-4 md:p-0">
 								<div
-									className="text-sm mb-1"
+									className="text-xs md:text-sm mb-1"
 									style={{ color: theme.mutedForeground }}>
 									Starting ROI
 								</div>
 								<div
-									className="text-2xl font-bold"
+									className="text-xl md:text-2xl font-bold"
 									style={{ color: theme.accent }}>
 									20%
 								</div>
 							</div>
-							<div className="text-center">
+							<div className="text-center p-4 md:p-0">
 								<div
-									className="text-sm mb-1"
+									className="text-xs md:text-sm mb-1"
 									style={{ color: theme.mutedForeground }}>
 									Total Growth
 								</div>
 								<div
-									className="text-2xl font-bold"
+									className="text-xl md:text-2xl font-bold"
 									style={{ color: theme.primary }}>
 									+17%
 								</div>
 							</div>
-							<div className="text-center">
+							<div className="text-center p-4 md:p-0">
 								<div
-									className="text-sm mb-1"
+									className="text-xs md:text-sm mb-1"
 									style={{ color: theme.mutedForeground }}>
 									Current ROI
 								</div>
 								<div
-									className="text-2xl font-bold"
+									className="text-xl md:text-2xl font-bold"
 									style={{ color: theme.primary }}>
 									37%
 								</div>
@@ -619,19 +705,226 @@ const SilverSeedLanding: React.FC = () => {
 				</div>
 			</section>
 
-			{/* Investment Mistakes Section */}
-			<section id="investment-mistakes" className="py-20 px-4">
+			{/* SECTIONS REMOVED: Investment Mistakes & Investment Opportunities - Now merged into "The SSI Advantage" section below */}
+
+			{/* SECTION REMOVED: Common Misconceptions - Duplicate content with Investment Mistakes */}
+
+			{/* Team Section */}
+			<section
+				id="team"
+				className="py-20 px-4 relative overflow-hidden"
+				style={{
+					backgroundImage:
+						"url('https://www.sutisoft.com/blog/wp-content/uploads/2015/04/iStock_000019688253_Medium-e1347908824981.jpg')",
+					backgroundSize: "cover",
+					backgroundPosition: "center",
+					backgroundAttachment: "fixed",
+				}}>
+				{/* Dark Green/Teal Overlay */}
+				<div
+					className="absolute inset-0"
+					style={{
+						background: `linear-gradient(135deg, ${theme.primary}F0, #00594DED)`,
+					}}
+				/>
+
+				{/* Content */}
+				<div className="max-w-7xl mx-auto relative z-10">
+					<motion.div
+						className="text-center mb-16"
+						{...fadeInUp}
+						style={{ color: "#ffffff" }}>
+						<h2 className="text-4xl md:text-5xl font-bold mb-4">
+							{siteData.team.title}
+						</h2>
+						<p className="text-xl max-w-3xl mx-auto opacity-95">
+							{siteData.team.subtitle}
+						</p>
+					</motion.div>
+
+					<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+						{siteData.team.members.map((member) => (
+							<motion.div
+								key={member.id}
+								{...fadeInUp}
+								className="rounded-2xl p-6 text-center hover:shadow-2xl hover:scale-105 transition-all backdrop-blur-sm"
+								style={{
+									backgroundColor: "rgba(255, 255, 255, 0.95)",
+									border: `2px solid ${theme.accent}40`,
+									boxShadow: `0 4px 20px rgba(0,0,0,0.3)`,
+								}}>
+								<div
+									className="w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center"
+									style={{
+										background: `linear-gradient(135deg, ${theme.primary}, ${theme.accent})`,
+										boxShadow: `0 6px 20px ${theme.primary}60`,
+									}}>
+									<Users className="h-12 w-12" style={{ color: "#ffffff" }} />
+								</div>
+								<h3 className="text-xl font-bold mb-1">{member.name}</h3>
+								<p
+									className="text-sm font-semibold mb-2"
+									style={{ color: theme.primary }}>
+									{member.title}
+								</p>
+								<p className="text-sm mb-3">{member.experience}</p>
+								<p className="text-sm">{member.bio}</p>
+							</motion.div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* Testimonials Section */}
+			<section id="testimonials" className="py-20 px-4">
 				<div className="max-w-7xl mx-auto">
 					<motion.div className="text-center mb-16" {...fadeInUp}>
 						<h2 className="text-4xl md:text-5xl font-bold mb-4">
-							{siteData.roiCaseStudies.investmentMistakes.title}
+							{siteData.testimonials.title}
 						</h2>
 						<p className="text-xl max-w-3xl mx-auto">
-							{siteData.roiCaseStudies.investmentMistakes.subtitle}
+							{siteData.testimonials.subtitle}
 						</p>
 					</motion.div>
 
 					<div className="grid md:grid-cols-3 gap-8">
+						{siteData.testimonials.reviews.map((review) => (
+							<motion.div
+								key={review.id}
+								{...fadeInUp}
+								className="rounded-2xl p-8 hover:shadow-2xl transition-all"
+								style={{
+									backgroundColor: theme.card,
+									border: `1px solid ${theme.border}`,
+								}}>
+								{/* Star Rating */}
+								<div className="flex gap-1 mb-4">
+									{[...Array(review.rating)].map((_, i) => (
+										<Star
+											key={i}
+											className="h-5 w-5 fill-current"
+											style={{ color: theme.primary }}
+										/>
+									))}
+								</div>
+
+								{/* Quote */}
+								<blockquote className="text-lg italic mb-6 leading-relaxed">
+									&ldquo;{review.quote}&rdquo;
+								</blockquote>
+
+								{/* Client Info with Image */}
+								<div className="flex items-center gap-4 mb-4">
+									<img
+										src={review.image}
+										alt={review.name}
+										className="w-16 h-16 rounded-full object-cover"
+										style={{
+											border: `3px solid ${theme.primary}`,
+											boxShadow: `0 4px 12px ${theme.primary}30`,
+										}}
+										onError={(e) => {
+											// Fallback to initial if image fails to load
+											e.currentTarget.style.display = "none";
+											e.currentTarget.nextElementSibling?.classList.remove(
+												"hidden"
+											);
+										}}
+									/>
+									<div
+										className="w-16 h-16 rounded-full hidden items-center justify-center font-bold text-xl"
+										style={{
+											backgroundColor: theme.primary,
+											color: "#ffffff",
+											border: `3px solid ${theme.primary}`,
+										}}>
+										{review.name.charAt(0)}
+									</div>
+									<div className="flex-1">
+										<div className="font-bold text-lg">{review.name}</div>
+										<div
+											className="text-sm font-medium"
+											style={{ color: theme.primary }}>
+											{review.role}
+										</div>
+										<div className="text-sm opacity-75">{review.location}</div>
+									</div>
+								</div>
+
+								{/* Investment Details */}
+								<div
+									className="flex justify-between text-sm pt-4 border-t"
+									style={{ borderColor: theme.border }}>
+									<span className="opacity-75">{review.investment}</span>
+									<span className="font-bold" style={{ color: theme.primary }}>
+										{review.roi}
+									</span>
+								</div>
+							</motion.div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* Why Invest Section */}
+			<section
+				id="why-invest"
+				className="py-20 px-4"
+				style={{ backgroundColor: theme.muted }}>
+				<div className="max-w-7xl mx-auto">
+					<motion.div className="text-center mb-16" {...fadeInUp}>
+						<h2 className="text-4xl md:text-5xl font-bold mb-4">
+							{siteData.whyInvest.title}
+						</h2>
+						<p className="text-xl max-w-3xl mx-auto">
+							{siteData.whyInvest.subtitle}
+						</p>
+					</motion.div>
+
+					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+						{siteData.whyInvest.advantages.map((advantage) => {
+							const Icon = advantage.icon;
+							return (
+								<div
+									key={advantage.id}
+									className="rounded-2xl p-6"
+									style={{
+										backgroundColor: theme.card,
+										border: `2px solid ${theme.primary}`,
+									}}>
+									<div
+										className="inline-flex p-4 rounded-xl mb-4"
+										style={{ backgroundColor: theme.primary + "20" }}>
+										<Icon
+											className="h-8 w-8"
+											style={{ color: theme.primary }}
+										/>
+									</div>
+									<h3 className="text-xl font-bold mb-3">{advantage.title}</h3>
+									<p>{advantage.description}</p>
+								</div>
+							);
+						})}
+					</div>
+
+					{/* REMOVED: Comparison Table - Now in "SSI Advantage" section for better positioning */}
+				</div>
+			</section>
+
+			{/* The SSI Advantage: Your Investment Options Compared */}
+			<section id="ssi-advantage" className="py-20 px-4">
+				<div className="max-w-7xl mx-auto">
+					<motion.div className="text-center mb-16" {...fadeInUp}>
+						<h2 className="text-4xl md:text-5xl font-bold mb-4">
+							The SSI Advantage: Your Investment Options Compared
+						</h2>
+						<p className="text-xl max-w-3xl mx-auto">
+							Smart, hands-on investment that grows with you
+						</p>
+					</motion.div>
+
+					{/* Comparison: DIY vs REIT vs SSI */}
+					<div className="grid md:grid-cols-3 gap-8 mb-20">
 						{siteData.roiCaseStudies.investmentMistakes.options.map(
 							(option) => {
 								const Icon = option.icon;
@@ -700,430 +993,76 @@ const SilverSeedLanding: React.FC = () => {
 							}
 						)}
 					</div>
-				</div>
-			</section>
 
-			{/* Investment Opportunities Section */}
-			<section
-				id="investment-opportunities"
-				className="py-20 px-4"
-				style={{ backgroundColor: theme.muted }}>
-				<div className="max-w-7xl mx-auto">
-					<motion.div className="text-center mb-16" {...fadeInUp}>
-						<h2 className="text-4xl md:text-5xl font-bold mb-4">
-							{siteData.roiCaseStudies.opportunities.title}
-						</h2>
-						<p className="text-xl max-w-3xl mx-auto">
-							{siteData.roiCaseStudies.opportunities.subtitle}
-						</p>
-					</motion.div>
-
-					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{siteData.roiCaseStudies.opportunities.strategies.map(
-							(strategy) => {
-								const Icon = strategy.icon;
-								return (
-									<div
-										key={strategy.id}
-										className="rounded-2xl p-6"
-										style={{
-											backgroundColor: theme.card,
-											border: `1px solid ${theme.border}`,
-										}}>
-										<Icon
-											className="h-12 w-12 mb-4"
-											style={{ color: theme.primary }}
-										/>
-										<h3 className="text-xl font-bold mb-3">{strategy.title}</h3>
-										<p
-											className="mb-4"
-											style={{ color: theme.mutedForeground }}>
-											{strategy.description}
-										</p>
-
-										<ul className="space-y-2 mb-4">
-											{strategy.benefits.map((benefit, i) => (
-												<li key={i} className="flex items-start text-sm">
-													<span
-														className="mr-2"
-														style={{ color: theme.primary }}>
-														•
-													</span>
-													<span>{benefit}</span>
-												</li>
-											))}
-										</ul>
-
-										<div
-											className="text-sm italic p-3 rounded-lg"
-											style={{
-												backgroundColor: theme.primary + "10",
-												color: theme.primary,
-											}}>
-											<strong>Example:</strong> {strategy.example}
-										</div>
-									</div>
-								);
-							}
-						)}
-					</div>
-				</div>
-			</section>
-
-			{/* Common Misconceptions Section */}
-			<section id="common-misconceptions" className="py-20 px-4">
-				<div className="max-w-7xl mx-auto">
-					<motion.div className="text-center mb-16" {...fadeInUp}>
-						<h2 className="text-4xl md:text-5xl font-bold mb-4">
-							{siteData.roiCaseStudies.commonMisconceptions.title}
-						</h2>
-						<p className="text-xl mb-8">
-							{siteData.roiCaseStudies.commonMisconceptions.subtitle}
-						</p>
-						<p className="text-lg max-w-3xl mx-auto mb-12">
-							{siteData.roiCaseStudies.commonMisconceptions.introduction}
-						</p>
-					</motion.div>
-
-					{/* Perceived Options */}
-					<div className="grid md:grid-cols-3 gap-8 mb-16">
-						{siteData.roiCaseStudies.commonMisconceptions.perceivedOptions.map(
-							(option) => {
-								const Icon = option.icon;
-								return (
-									<div
-										key={option.id}
-										className="rounded-2xl p-6"
-										style={{
-											backgroundColor: theme.card,
-											border: `1px solid ${theme.border}`,
-										}}>
-										<div
-											className="inline-block px-3 py-1 rounded-full text-sm font-semibold mb-4"
-											style={{
-												backgroundColor: theme.mutedForeground + "20",
-												color: theme.mutedForeground,
-											}}>
-											{option.label}
-										</div>
-										<Icon
-											className="h-12 w-12 mb-4"
-											style={{ color: theme.mutedForeground }}
-										/>
-										<h3 className="text-xl font-bold mb-3">{option.title}</h3>
-										<p
-											className="mb-4"
-											style={{ color: theme.mutedForeground }}>
-											{option.description}
-										</p>
-
-										<ul className="space-y-2">
-											{option.drawbacks.map((drawback, i) => (
-												<li
-													key={i}
-													className="flex items-start text-sm"
-													style={{ color: theme.destructive }}>
-													<span className="mr-2">✗</span>
-													<span>{drawback}</span>
-												</li>
-											))}
-										</ul>
-									</div>
-								);
-							}
-						)}
-					</div>
-
-					{/* The Reality - SSI Advantage */}
+					{/* Strategic Investment Opportunities */}
 					<div
-						className="rounded-3xl p-12 text-center"
+						className="rounded-3xl p-8 md:p-12 mb-12"
 						style={{
-							background: `linear-gradient(135deg, ${theme.primary}20, ${theme.accent}20)`,
-							border: `2px solid ${theme.primary}`,
+							background: `linear-gradient(135deg, ${theme.primary}15, ${theme.accent}15)`,
+							border: `2px solid ${theme.primary}40`,
 						}}>
-						<h3 className="text-3xl font-bold mb-4">
-							{siteData.roiCaseStudies.commonMisconceptions.reality.title}
-						</h3>
-						<h4
-							className="text-2xl font-semibold mb-4"
-							style={{ color: theme.primary }}>
-							{siteData.roiCaseStudies.commonMisconceptions.reality.subtitle}
-						</h4>
-						<p className="text-lg mb-12 max-w-3xl mx-auto">
-							{siteData.roiCaseStudies.commonMisconceptions.reality.description}
-						</p>
+						<div className="text-center mb-12">
+							<h3 className="text-3xl md:text-4xl font-bold mb-4">
+								What We Look For: Strategic Opportunities
+							</h3>
+							<p
+								className="text-lg max-w-3xl mx-auto"
+								style={{ color: theme.mutedForeground }}>
+								Our investment approach focuses on properties with maximum
+								growth and cash flow potential
+							</p>
+						</div>
 
-						<div className="grid md:grid-cols-4 gap-8 mb-12">
-							{siteData.roiCaseStudies.commonMisconceptions.reality.benefits.map(
-								(benefit) => {
-									const Icon = benefit.icon;
+						<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+							{siteData.roiCaseStudies.opportunities.strategies.map(
+								(strategy) => {
+									const Icon = strategy.icon;
 									return (
-										<div key={benefit.title}>
+										<div
+											key={strategy.id}
+											className="rounded-2xl p-6 hover:scale-105 transition-all"
+											style={{
+												backgroundColor: theme.card,
+												border: `2px solid ${theme.border}`,
+											}}>
 											<Icon
-												className="h-12 w-12 mx-auto mb-4"
+												className="h-12 w-12 mb-4"
 												style={{ color: theme.primary }}
 											/>
-											<h4 className="font-bold mb-2">{benefit.title}</h4>
+											<h4 className="text-xl font-bold mb-3">
+												{strategy.title}
+											</h4>
 											<p
-												className="text-sm"
+												className="mb-4 text-sm"
 												style={{ color: theme.mutedForeground }}>
-												{benefit.description}
+												{strategy.description}
 											</p>
+
+											<ul className="space-y-2 mb-4">
+												{strategy.benefits.map((benefit, i) => (
+													<li key={i} className="flex items-start text-sm">
+														<span
+															className="mr-2"
+															style={{ color: theme.primary }}>
+															✓
+														</span>
+														<span>{benefit}</span>
+													</li>
+												))}
+											</ul>
+
+											<div
+												className="text-xs italic p-3 rounded-lg font-semibold"
+												style={{
+													backgroundColor: theme.primary + "20",
+													color: theme.primary,
+												}}>
+												<strong>Example:</strong> {strategy.example}
+											</div>
 										</div>
 									);
 								}
 							)}
-						</div>
-
-						<div className="text-center">
-							<p className="text-2xl font-semibold mb-6">
-								{siteData.roiCaseStudies.commonMisconceptions.reality.cta.text}
-							</p>
-							<button
-								onClick={() =>
-									scrollToSection(
-										siteData.roiCaseStudies.commonMisconceptions.reality.cta
-											.action
-									)
-								}
-								className="px-8 py-4 rounded-full text-lg font-bold transition-all"
-								style={{
-									backgroundColor: theme.primary,
-									color: theme.primaryForeground,
-								}}
-								onMouseEnter={(e) => {
-									e.currentTarget.style.transform = "scale(1.05)";
-									e.currentTarget.style.boxShadow = `0 8px 20px ${theme.primary}40`;
-								}}
-								onMouseLeave={(e) => {
-									e.currentTarget.style.transform = "scale(1)";
-									e.currentTarget.style.boxShadow = "none";
-								}}>
-								{
-									siteData.roiCaseStudies.commonMisconceptions.reality.cta
-										.buttonText
-								}
-							</button>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			{/* Team Section */}
-			<section
-				id="team"
-				className="py-20 px-4"
-				style={{ backgroundColor: theme.muted }}>
-				<div className="max-w-7xl mx-auto">
-					<motion.div className="text-center mb-16" {...fadeInUp}>
-						<h2 className="text-4xl md:text-5xl font-bold mb-4">
-							{siteData.team.title}
-						</h2>
-						<p className="text-xl max-w-3xl mx-auto">
-							{siteData.team.subtitle}
-						</p>
-					</motion.div>
-
-					<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-						{siteData.team.members.map((member) => (
-							<div
-								key={member.id}
-								className="rounded-2xl p-6 text-center hover:shadow-xl transition-all"
-								style={{
-									backgroundColor: theme.card,
-									border: `1px solid ${theme.border}`,
-								}}>
-								<div
-									className="w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center"
-									style={{
-										background: `linear-gradient(135deg, ${theme.primary}, ${theme.accent})`,
-									}}>
-									<Users className="h-12 w-12" style={{ color: "#ffffff" }} />
-								</div>
-								<h3 className="text-xl font-bold mb-1">{member.name}</h3>
-								<p
-									className="text-sm font-semibold mb-2"
-									style={{ color: theme.primary }}>
-									{member.title}
-								</p>
-								<p className="text-sm mb-3">{member.experience}</p>
-								<p className="text-sm">{member.bio}</p>
-							</div>
-						))}
-					</div>
-				</div>
-			</section>
-
-			{/* Testimonials Section */}
-			<section id="testimonials" className="py-20 px-4">
-				<div className="max-w-7xl mx-auto">
-					<motion.div className="text-center mb-16" {...fadeInUp}>
-						<h2 className="text-4xl md:text-5xl font-bold mb-4">
-							{siteData.testimonials.title}
-						</h2>
-						<p className="text-xl max-w-3xl mx-auto">
-							{siteData.testimonials.subtitle}
-						</p>
-					</motion.div>
-
-					<div className="grid md:grid-cols-3 gap-8">
-						{siteData.testimonials.reviews.map((review) => (
-							<div
-								key={review.id}
-								className="rounded-2xl p-8"
-								style={{
-									backgroundColor: theme.card,
-									border: `1px solid ${theme.border}`,
-								}}>
-								<div className="flex gap-1 mb-4">
-									{[...Array(review.rating)].map((_, i) => (
-										<Star
-											key={i}
-											className="h-5 w-5 fill-current"
-											style={{ color: theme.warning }}
-										/>
-									))}
-								</div>
-								<blockquote className="text-lg italic mb-6">
-									&ldquo;{review.quote}&rdquo;
-								</blockquote>
-
-								<div className="flex items-center gap-4 mb-4">
-									<div
-										className="w-12 h-12 rounded-full flex items-center justify-center font-bold"
-										style={{
-											backgroundColor: theme.primary,
-											color: "#ffffff",
-										}}>
-										{review.name.charAt(0)}
-									</div>
-									<div>
-										<div className="font-bold">{review.name}</div>
-										<div className="text-sm">{review.location}</div>
-									</div>
-								</div>
-
-								<div
-									className="flex justify-between text-sm pt-4 border-t"
-									style={{ borderColor: theme.border }}>
-									<span>{review.investment}</span>
-									<span
-										className="font-semibold"
-										style={{ color: theme.primary }}>
-										{review.roi}
-									</span>
-								</div>
-							</div>
-						))}
-					</div>
-				</div>
-			</section>
-
-			{/* Why Invest Section */}
-			<section
-				id="why-invest"
-				className="py-20 px-4"
-				style={{ backgroundColor: theme.muted }}>
-				<div className="max-w-7xl mx-auto">
-					<motion.div className="text-center mb-16" {...fadeInUp}>
-						<h2 className="text-4xl md:text-5xl font-bold mb-4">
-							{siteData.whyInvest.title}
-						</h2>
-						<p className="text-xl max-w-3xl mx-auto">
-							{siteData.whyInvest.subtitle}
-						</p>
-					</motion.div>
-
-					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-						{siteData.whyInvest.advantages.map((advantage) => {
-							const Icon = advantage.icon;
-							return (
-								<div
-									key={advantage.id}
-									className="rounded-2xl p-6"
-									style={{
-										backgroundColor: theme.card,
-										border: `2px solid ${theme.primary}`,
-									}}>
-									<div
-										className="inline-flex p-4 rounded-xl mb-4"
-										style={{ backgroundColor: theme.primary + "20" }}>
-										<Icon
-											className="h-8 w-8"
-											style={{ color: theme.primary }}
-										/>
-									</div>
-									<h3 className="text-xl font-bold mb-3">{advantage.title}</h3>
-									<p>{advantage.description}</p>
-								</div>
-							);
-						})}
-					</div>
-
-					{/* Comparison Table */}
-					<div
-						className="rounded-2xl p-8"
-						style={{
-							backgroundColor: theme.card,
-							border: `1px solid ${theme.border}`,
-						}}>
-						<h3 className="text-2xl font-bold mb-8 text-center">
-							{siteData.whyInvest.comparisonTable.title}
-						</h3>
-
-						<div className="grid md:grid-cols-3 gap-6">
-							{siteData.whyInvest.comparisonTable.columns.map((column) => (
-								<div
-									key={column.type}
-									className="rounded-xl p-6 border-2"
-									style={{
-										borderColor:
-											column.status === "✅" ? theme.primary : theme.border,
-										backgroundColor:
-											column.status === "✅"
-												? theme.primary + "10"
-												: "transparent",
-									}}>
-									<div className="text-center mb-4">
-										<div className="text-4xl mb-2">{column.status}</div>
-										<h4 className="text-xl font-bold">{column.type}</h4>
-									</div>
-
-									{column.pros.length > 0 && (
-										<div className="mb-4">
-											<div
-												className="text-sm font-semibold mb-2"
-												style={{ color: theme.accent }}>
-												✓ Pros:
-											</div>
-											<ul className="space-y-1">
-												{column.pros.map((pro, i) => (
-													<li key={i} className="text-sm">
-														• {pro}
-													</li>
-												))}
-											</ul>
-										</div>
-									)}
-
-									{column.cons.length > 0 && (
-										<div>
-											<div
-												className="text-sm font-semibold mb-2"
-												style={{ color: theme.destructive }}>
-												✗ Cons:
-											</div>
-											<ul className="space-y-1">
-												{column.cons.map((con, i) => (
-													<li key={i} className="text-sm">
-														• {con}
-													</li>
-												))}
-											</ul>
-										</div>
-									)}
-								</div>
-							))}
 						</div>
 					</div>
 				</div>
@@ -1198,53 +1137,102 @@ const SilverSeedLanding: React.FC = () => {
 						</div>
 					</div>
 
-					{/* Timeline */}
-					<div className="space-y-6">
-						{siteData.trackRecord.timeline.map((item) => {
+					{/* Interactive Timeline */}
+					<div className="relative max-w-5xl mx-auto">
+						{/* Vertical connecting line */}
+						<div
+							className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 top-0"
+							style={{
+								background: `linear-gradient(to bottom, ${theme.primary}, ${theme.accent})`,
+							}}
+						/>
+
+						{/* Timeline items with alternating layout */}
+						{siteData.trackRecord.timeline.map((item, index) => {
 							const Icon = item.icon;
+							const isLeft = index % 2 === 0;
+
 							return (
-								<div
+								<motion.div
 									key={item.year}
-									className="rounded-2xl p-6 flex items-start gap-6"
-									style={{
-										backgroundColor: theme.card,
-										border: `1px solid ${theme.border}`,
-									}}>
-									<div
-										className="flex-shrink-0 w-20 h-20 rounded-xl flex flex-col items-center justify-center font-bold"
-										style={{
-											backgroundColor: theme.primary,
-											color: "#ffffff",
-										}}>
-										<div className="text-2xl">{item.year}</div>
+									initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
+									whileInView={{ opacity: 1, x: 0 }}
+									viewport={{ once: true, margin: "-100px" }}
+									transition={{ duration: 0.6, delay: index * 0.1 }}
+									className={`relative flex items-center mb-16 ${
+										isLeft ? "flex-row" : "flex-row-reverse"
+									}`}>
+									{/* Content Card */}
+									<div className="w-5/12">
+										<div
+											className="rounded-2xl p-6 hover:scale-105 transition-all duration-300 cursor-pointer group"
+											style={{
+												backgroundColor: theme.card,
+												border: `2px solid ${theme.border}`,
+												boxShadow: `0 4px 20px ${theme.primary}20`,
+											}}
+											onMouseEnter={(e) => {
+												e.currentTarget.style.borderColor = theme.primary;
+												e.currentTarget.style.boxShadow = `0 8px 30px ${theme.primary}40`;
+											}}
+											onMouseLeave={(e) => {
+												e.currentTarget.style.borderColor = theme.border;
+												e.currentTarget.style.boxShadow = `0 4px 20px ${theme.primary}20`;
+											}}>
+											<div className="flex items-start gap-3 mb-3">
+												<Icon
+													className="h-7 w-7 flex-shrink-0 group-hover:scale-110 transition-transform"
+													style={{ color: theme.primary }}
+												/>
+												<h3 className="text-xl font-bold leading-tight">
+													{item.milestone}
+													{item.roi && (
+														<span
+															className="block text-2xl mt-1"
+															style={{ color: theme.primary }}>
+															{item.roi}% ROI
+														</span>
+													)}
+												</h3>
+											</div>
+											<p
+												className="text-sm leading-relaxed"
+												style={{ color: theme.mutedForeground }}>
+												{item.description}
+											</p>
+											{item.clients && (
+												<div
+													className="mt-3 inline-block px-3 py-1 rounded-full text-sm font-semibold"
+													style={{
+														backgroundColor: theme.primary + "20",
+														color: theme.primary,
+													}}>
+													{item.clients} Clients
+												</div>
+											)}
+										</div>
 									</div>
 
-									<div className="flex-1">
-										<div className="flex items-start gap-3 mb-2">
-											<Icon
-												className="h-6 w-6 flex-shrink-0"
-												style={{ color: theme.primary }}
-											/>
-											<h3 className="text-xl font-bold">
-												{item.milestone}
-												{item.roi && (
-													<span style={{ color: theme.primary }}>
-														{" "}
-														- {item.roi}% ROI
-													</span>
-												)}
-											</h3>
-										</div>
-										<p>{item.description}</p>
-										{item.clients && (
-											<div
-												className="mt-2 text-sm font-semibold"
-												style={{ color: theme.primary }}>
-												{item.clients} Clients
-											</div>
-										)}
+									{/* Center Year Badge */}
+									<div className="absolute left-1/2 transform -translate-x-1/2 z-10">
+										<motion.div
+											initial={{ scale: 0 }}
+											whileInView={{ scale: 1 }}
+											viewport={{ once: true }}
+											transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+											className="w-20 h-20 rounded-full flex items-center justify-center font-bold text-2xl shadow-lg"
+											style={{
+												backgroundColor: theme.background,
+												border: `4px solid ${theme.primary}`,
+												color: theme.primary,
+											}}>
+											{item.year}
+										</motion.div>
 									</div>
-								</div>
+
+									{/* Spacer for opposite side */}
+									<div className="w-5/12" />
+								</motion.div>
 							);
 						})}
 					</div>
@@ -1328,7 +1316,7 @@ const SilverSeedLanding: React.FC = () => {
 
 							{/* Email */}
 							<a
-								href="mailto:administration@silverseedinv.com"
+								href="mailto:admin@silverseedinv.com"
 								className="flex flex-col items-center text-center p-8 rounded-2xl hover:scale-105 transition-all group"
 								style={{
 									backgroundColor: theme.card,
@@ -1337,10 +1325,10 @@ const SilverSeedLanding: React.FC = () => {
 								<div
 									className="p-4 rounded-full mb-4 group-hover:scale-110 transition-all"
 									style={{
-										backgroundColor: theme.warning + "20",
-										border: `2px solid ${theme.warning}`,
+										backgroundColor: theme.accent + "20",
+										border: `2px solid ${theme.accent}`,
 									}}>
-									<Mail className="h-8 w-8" style={{ color: theme.warning }} />
+									<Mail className="h-8 w-8" style={{ color: theme.accent }} />
 								</div>
 								<div
 									className="text-sm font-semibold mb-2"
@@ -1348,7 +1336,7 @@ const SilverSeedLanding: React.FC = () => {
 									Email Us
 								</div>
 								<div className="text-lg font-bold break-all">
-									administration@silverseedinv.com
+									admin@silverseedinv.com
 								</div>
 							</a>
 						</div>

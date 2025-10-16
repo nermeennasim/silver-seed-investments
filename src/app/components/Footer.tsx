@@ -28,8 +28,8 @@ const Footer: React.FC = () => {
 		{
 			icon: Mail,
 			label: "Email",
-			value: "administration@silverseedinv.com",
-			href: "mailto:administration@silverseedinv.com",
+			value: "admin@silverseedinv.com",
+			href: "mailto:admin@silverseedinv.com",
 		},
 		{
 			icon: MapPin,

@@ -78,7 +78,7 @@ Your site has the following sections (in order):
 
 - Phone: +1-437-984-1806
 - WhatsApp: +966-596-237-616
-- Email: administration@silverseedinv.com
+- Email: admin@silverseedinv.com
 - Website: www.SilverSeedInv.com
 - Address: 6894, Barrisdale Drive, Mississauga, Ontario
 
