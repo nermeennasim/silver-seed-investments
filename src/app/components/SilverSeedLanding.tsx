@@ -489,13 +489,34 @@ const SilverSeedLanding: React.FC = () => {
 			</section>
 
 			{/* ROI Case Studies Section */}
-			<section id="roi-case-studies" className="py-20 px-4">
-				<div className="max-w-7xl mx-auto">
-					<motion.div className="text-center mb-16" {...fadeInUp}>
+			<section
+				id="roi-case-studies"
+				className="py-20 px-4 relative overflow-hidden"
+				style={{
+					backgroundImage:
+						"url('https://static.tildacdn.com/tild3932-3030-4463-b130-353836336366/2.jpg')",
+					backgroundSize: "cover",
+					backgroundPosition: "center",
+					backgroundAttachment: "fixed",
+				}}>
+				{/* Green Overlay */}
+				<div
+					className="absolute inset-0"
+					style={{
+						background: `linear-gradient(135deg, ${theme.primary}E8, ${theme.accent}E8)`,
+					}}
+				/>
+
+				{/* Content */}
+				<div className="max-w-7xl mx-auto relative z-10">
+					<motion.div
+						className="text-center mb-16"
+						{...fadeInUp}
+						style={{ color: "#ffffff" }}>
 						<h2 className="text-4xl md:text-5xl font-bold mb-4">
 							{siteData.roiCaseStudies.title}
 						</h2>
-						<p className="text-xl max-w-3xl mx-auto">
+						<p className="text-xl max-w-3xl mx-auto opacity-95">
 							{siteData.roiCaseStudies.subtitle}
 						</p>
 					</motion.div>
@@ -504,12 +525,14 @@ const SilverSeedLanding: React.FC = () => {
 						{siteData.roiCaseStudies.caseStudies.map((study) => {
 							const Icon = study.icon;
 							return (
-								<div
+								<motion.div
 									key={study.id}
-									className="rounded-2xl p-8 border-2"
+									{...fadeInUp}
+									className="rounded-2xl p-8 border-2 backdrop-blur-sm hover:scale-105 transition-transform"
 									style={{
-										backgroundColor: theme.card,
+										backgroundColor: "rgba(255, 255, 255, 0.95)",
 										borderColor: theme.primary,
+										boxShadow: `0 8px 30px rgba(0,0,0,0.3)`,
 									}}>
 									<div className="flex items-start justify-between mb-4">
 										<div>
@@ -542,17 +565,18 @@ const SilverSeedLanding: React.FC = () => {
 											</div>
 										))}
 									</div>
-								</div>
+								</motion.div>
 							);
 						})}
 					</div>
 
 					{/* ROI Trend Chart - Recharts Implementation */}
 					<div
-						className="rounded-2xl p-6 md:p-12"
+						className="rounded-2xl p-6 md:p-12 backdrop-blur-sm"
 						style={{
-							backgroundColor: theme.card,
-							border: `2px solid ${theme.border}`,
+							backgroundColor: "rgba(255, 255, 255, 0.95)",
+							border: `2px solid ${theme.primary}60`,
+							boxShadow: `0 8px 30px rgba(0,0,0,0.3)`,
 						}}>
 						<div className="text-center mb-8 md:mb-12">
 							<h3 className="text-2xl md:text-3xl font-bold mb-3">
