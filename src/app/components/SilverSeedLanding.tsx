@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { useTheme } from "../contexts/ThemeContext";
 import { motion } from "framer-motion";
 import {
@@ -32,6 +33,7 @@ const SilverSeedLanding: React.FC = () => {
 	const { theme } = useTheme();
 	const [activeSection, setActiveSection] = useState<string>("hero");
 	const [mounted, setMounted] = useState<boolean>(false);
+	const [showCalendar, setShowCalendar] = useState<boolean>(false);
 
 	useEffect(() => {
 		setMounted(true);
@@ -141,8 +143,11 @@ const SilverSeedLanding: React.FC = () => {
 					/>
 				</div>
 
-				{/* Teal overlay for better text readability */}
-				<div
+				{/* Animated Teal overlay for better text readability */}
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 1 }}
 					className="absolute inset-0"
 					style={{
 						background: `linear-gradient(135deg, rgba(3, 167, 145, 0.85), rgba(3, 167, 145, 0.75))`,
@@ -150,42 +155,100 @@ const SilverSeedLanding: React.FC = () => {
 					}}
 				/>
 
+				{/* Floating animated elements */}
+				<div className="absolute inset-0 overflow-hidden pointer-events-none">
+					{[...Array(6)].map((_, i) => (
+						<motion.div
+							key={i}
+							className="absolute w-32 h-32 border-2 border-white/10 rounded-lg"
+							initial={{ opacity: 0 }}
+							animate={{
+								y: [0, -30, 0],
+								x: [0, 20, 0],
+								rotate: [0, 180, 360],
+								opacity: [0.1, 0.3, 0.1],
+							}}
+							transition={{
+								duration: 5 + i,
+								repeat: Infinity,
+								delay: i * 0.7,
+							}}
+							style={{
+								top: `${10 + i * 15}%`,
+								left: `${5 + i * 15}%`,
+							}}
+						/>
+					))}
+				</div>
+
 				{/* Content */}
 				<div className="max-w-7xl mx-auto text-center relative z-10">
-					<motion.div {...fadeInUp}>
-						<h1 className="text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-2xl">
+					<motion.div
+						initial={{ opacity: 0, y: 50 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, delay: 0.2 }}>
+						<motion.h1
+							className="text-5xl md:text-7xl font-bold mb-6 text-white drop-shadow-2xl"
+							initial={{ scale: 0.9, opacity: 0 }}
+							animate={{ scale: 1, opacity: 1 }}
+							transition={{ duration: 0.8, delay: 0.4 }}>
 							{siteData.hero.title}
-						</h1>
-						<p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-white drop-shadow-lg">
+						</motion.h1>
+
+						<motion.p
+							className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-white drop-shadow-lg"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.8, delay: 0.6 }}>
 							{siteData.hero.subtitle}
-						</p>
-						<p className="text-lg mb-12 max-w-2xl mx-auto text-white/95 drop-shadow-lg">
+						</motion.p>
+
+						<motion.p
+							className="text-lg mb-12 max-w-2xl mx-auto text-white/95 drop-shadow-lg"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.8, delay: 0.8 }}>
 							{siteData.hero.description}
-						</p>
+						</motion.p>
 
 						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 max-w-5xl mx-auto">
 							{siteData.hero.highlights.map((highlight, index) => (
-								<div
+								<motion.div
 									key={index}
+									initial={{ opacity: 0, y: 20 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
+									whileHover={{ scale: 1.05, y: -5 }}
 									className="rounded-xl p-4 border-2 backdrop-blur-md shadow-lg"
 									style={{
 										backgroundColor: "rgba(26, 31, 58, 0.85)",
 										borderColor: theme.primary,
 									}}>
-									<CheckCircle2
-										className="h-6 w-6 mb-2 mx-auto"
-										style={{ color: theme.primary }}
-									/>
+									<motion.div
+										initial={{ scale: 0 }}
+										animate={{ scale: 1 }}
+										transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}>
+										<CheckCircle2
+											className="h-6 w-6 mb-2 mx-auto"
+											style={{ color: theme.primary }}
+										/>
+									</motion.div>
 									<p className="text-sm font-medium text-white">{highlight}</p>
-								</div>
+								</motion.div>
 							))}
 						</div>
 
-						<div className="flex flex-col sm:flex-row gap-4 justify-center">
-							<button
+						<motion.div
+							className="flex flex-col sm:flex-row gap-4 justify-center"
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 1.5 }}>
+							<motion.button
 								onClick={() => scrollToSection("services")}
-								className="px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:scale-105 shadow-2xl"
+								className="px-8 py-4 rounded-xl font-semibold text-lg transition-all shadow-2xl"
 								style={{ backgroundColor: theme.primary, color: "#ffffff" }}
+								whileHover={{ scale: 1.05, y: -2 }}
+								whileTap={{ scale: 0.98 }}
 								onMouseEnter={(e) => {
 									e.currentTarget.style.boxShadow = `0 10px 30px ${theme.primary}60`;
 								}}
@@ -195,15 +258,18 @@ const SilverSeedLanding: React.FC = () => {
 								}}>
 								{siteData.hero.cta.primary.text}
 								<ArrowRight className="inline-block ml-2 h-5 w-5" />
-							</button>
-							<button
+							</motion.button>
+
+							<motion.button
 								onClick={() => scrollToSection("contact")}
-								className="px-8 py-4 rounded-xl font-semibold text-lg border-2 transition-all hover:scale-105 backdrop-blur-md shadow-2xl"
+								className="px-8 py-4 rounded-xl font-semibold text-lg border-2 transition-all backdrop-blur-md shadow-2xl"
 								style={{
 									borderColor: theme.primary,
 									color: "#ffffff",
 									backgroundColor: "rgba(26, 31, 58, 0.6)",
 								}}
+								whileHover={{ scale: 1.05, y: -2 }}
+								whileTap={{ scale: 0.98 }}
 								onMouseEnter={(e) => {
 									e.currentTarget.style.backgroundColor =
 										"rgba(26, 31, 58, 0.9)";
@@ -215,8 +281,8 @@ const SilverSeedLanding: React.FC = () => {
 									e.currentTarget.style.borderColor = theme.primary;
 								}}>
 								{siteData.hero.cta.secondary.text}
-							</button>
-						</div>
+							</motion.button>
+						</motion.div>
 					</motion.div>
 				</div>
 			</section>
@@ -246,10 +312,13 @@ const SilverSeedLanding: React.FC = () => {
 							style={{
 								boxShadow: `0 10px 40px ${theme.primary}40`,
 							}}>
-							<img
+							<Image
 								src="/about_us_section_bg.jpg"
 								alt="Silver Seed Investment - About Us"
+								width={600}
+								height={400}
 								className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+								priority
 							/>
 						</motion.div>
 					</div>
@@ -270,7 +339,7 @@ const SilverSeedLanding: React.FC = () => {
 							<div
 								className="text-7xl md:text-8xl mb-6 leading-none"
 								style={{ color: theme.primary, opacity: 0.2 }}>
-								"
+								&ldquo;
 							</div>
 							<blockquote className="text-2xl md:text-3xl font-semibold italic mb-8 leading-relaxed">
 								{siteData.about.quote.text}
@@ -632,7 +701,7 @@ const SilverSeedLanding: React.FC = () => {
 										}}
 										labelStyle={{ color: theme.foreground, fontWeight: 600 }}
 										itemStyle={{ color: theme.primary, fontWeight: 700 }}
-										formatter={(value: any) => [`${value}%`, "ROI"]}
+										formatter={(value: number) => [`${value}%`, "ROI"]}
 									/>
 									<Bar
 										dataKey="roi"
@@ -650,7 +719,6 @@ const SilverSeedLanding: React.FC = () => {
 										<LabelList
 											dataKey="roi"
 											position="top"
-											formatter={(value: any) => `${value}%`}
 											style={{
 												fill: theme.primary,
 												fontWeight: 700,
@@ -839,31 +907,17 @@ const SilverSeedLanding: React.FC = () => {
 
 								{/* Client Info with Image */}
 								<div className="flex items-center gap-4 mb-4">
-									<img
+									<Image
 										src={review.image}
 										alt={review.name}
+										width={64}
+										height={64}
 										className="w-16 h-16 rounded-full object-cover"
 										style={{
 											border: `3px solid ${theme.primary}`,
 											boxShadow: `0 4px 12px ${theme.primary}30`,
 										}}
-										onError={(e) => {
-											// Fallback to initial if image fails to load
-											e.currentTarget.style.display = "none";
-											e.currentTarget.nextElementSibling?.classList.remove(
-												"hidden"
-											);
-										}}
 									/>
-									<div
-										className="w-16 h-16 rounded-full hidden items-center justify-center font-bold text-xl"
-										style={{
-											backgroundColor: theme.primary,
-											color: "#ffffff",
-											border: `3px solid ${theme.primary}`,
-										}}>
-										{review.name.charAt(0)}
-									</div>
 									<div className="flex-1">
 										<div className="font-bold text-lg">{review.name}</div>
 										<div
@@ -893,14 +947,29 @@ const SilverSeedLanding: React.FC = () => {
 			{/* Why Invest Section */}
 			<section
 				id="why-invest"
-				className="py-20 px-4"
-				style={{ backgroundColor: theme.muted }}>
-				<div className="max-w-7xl mx-auto">
+				className="py-20 px-4 relative overflow-hidden"
+				style={{
+					backgroundImage: "url('https://blog.homesmart.com/hubfs/Imported_Blog_Media/handshake-1.jpeg')",
+					backgroundSize: "cover",
+					backgroundPosition: "center",
+					backgroundAttachment: "fixed",
+				}}>
+				{/* Green Teal Overlay */}
+				<div
+					className="absolute inset-0"
+					style={{
+						background: `linear-gradient(135deg, rgba(3, 167, 145, 0.88), rgba(3, 167, 145, 0.82))`,
+						backdropFilter: "blur(1px)",
+					}}
+				/>
+
+				{/* Content */}
+				<div className="max-w-7xl mx-auto relative z-10">
 					<motion.div className="text-center mb-16" {...fadeInUp}>
-						<h2 className="text-4xl md:text-5xl font-bold mb-4">
+						<h2 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-xl">
 							{siteData.whyInvest.title}
 						</h2>
-						<p className="text-xl max-w-3xl mx-auto">
+						<p className="text-xl max-w-3xl mx-auto text-white drop-shadow-lg">
 							{siteData.whyInvest.subtitle}
 						</p>
 					</motion.div>
@@ -909,12 +978,14 @@ const SilverSeedLanding: React.FC = () => {
 						{siteData.whyInvest.advantages.map((advantage) => {
 							const Icon = advantage.icon;
 							return (
-								<div
+								<motion.div
 									key={advantage.id}
-									className="rounded-2xl p-6"
+									{...fadeInUp}
+									className="rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-all"
 									style={{
-										backgroundColor: theme.card,
+										backgroundColor: "rgba(255, 255, 255, 0.95)",
 										border: `2px solid ${theme.primary}`,
+										boxShadow: `0 8px 30px rgba(0,0,0,0.3)`,
 									}}>
 									<div
 										className="inline-flex p-4 rounded-xl mb-4"
@@ -926,7 +997,7 @@ const SilverSeedLanding: React.FC = () => {
 									</div>
 									<h3 className="text-xl font-bold mb-3">{advantage.title}</h3>
 									<p>{advantage.description}</p>
-								</div>
+								</motion.div>
 							);
 						})}
 					</div>
@@ -1044,44 +1115,59 @@ const SilverSeedLanding: React.FC = () => {
 									return (
 										<div
 											key={strategy.id}
-											className="rounded-2xl p-6 hover:scale-105 transition-all"
+											className="rounded-2xl overflow-hidden hover:scale-105 transition-all relative"
 											style={{
-												backgroundColor: theme.card,
 												border: `2px solid ${theme.border}`,
+												boxShadow: `0 4px 20px rgba(0,0,0,0.15)`,
 											}}>
-											<Icon
-												className="h-12 w-12 mb-4"
-												style={{ color: theme.primary }}
-											/>
-											<h4 className="text-xl font-bold mb-3">
-												{strategy.title}
-											</h4>
-											<p
-												className="mb-4 text-sm"
-												style={{ color: theme.mutedForeground }}>
-												{strategy.description}
-											</p>
-
-											<ul className="space-y-2 mb-4">
-												{strategy.benefits.map((benefit, i) => (
-													<li key={i} className="flex items-start text-sm">
-														<span
-															className="mr-2"
-															style={{ color: theme.primary }}>
-															✓
-														</span>
-														<span>{benefit}</span>
-													</li>
-												))}
-											</ul>
-
+											{/* Background Image */}
 											<div
-												className="text-xs italic p-3 rounded-lg font-semibold"
+												className="absolute inset-0"
 												style={{
-													backgroundColor: theme.primary + "20",
-													color: theme.primary,
-												}}>
-												<strong>Example:</strong> {strategy.example}
+													backgroundImage: `url('${strategy.backgroundImage}')`,
+													backgroundSize: "cover",
+													backgroundPosition: "center",
+												}}
+											/>
+
+											{/* Overlay */}
+											<div
+												className="absolute inset-0"
+												style={{
+													background: `linear-gradient(135deg, rgba(3, 167, 145, 0.92), rgba(3, 167, 145, 0.88))`,
+												}}
+											/>
+
+											{/* Content */}
+											<div className="relative z-10 p-6">
+												<Icon
+													className="h-12 w-12 mb-4"
+													style={{ color: "#ffffff" }}
+												/>
+												<h4 className="text-xl font-bold mb-3 text-white">
+													{strategy.title}
+												</h4>
+												<p className="mb-4 text-sm text-white/95">
+													{strategy.description}
+												</p>
+
+												<ul className="space-y-2 mb-4">
+													{strategy.benefits.map((benefit, i) => (
+														<li key={i} className="flex items-start text-sm text-white">
+															<span className="mr-2">✓</span>
+															<span>{benefit}</span>
+														</li>
+													))}
+												</ul>
+
+												<div
+													className="text-xs italic p-3 rounded-lg font-semibold backdrop-blur-sm"
+													style={{
+														backgroundColor: "rgba(255, 255, 255, 0.25)",
+														color: "#ffffff",
+													}}>
+													<strong>Example:</strong> {strategy.example}
+												</div>
 											</div>
 										</div>
 									);
@@ -1287,7 +1373,7 @@ const SilverSeedLanding: React.FC = () => {
 						<div className="grid md:grid-cols-3 gap-6 mb-12">
 							{/* Phone */}
 							<a
-								href="tel:+14379841806"
+								href="tel:+1-365-292-6333"
 								className="flex flex-col items-center text-center p-8 rounded-2xl hover:scale-105 transition-all group"
 								style={{
 									backgroundColor: theme.card,
@@ -1306,12 +1392,11 @@ const SilverSeedLanding: React.FC = () => {
 									style={{ color: theme.mutedForeground }}>
 									Call Us
 								</div>
-								<div className="text-lg font-bold">+1-437-984-1806</div>
+								<div className="text-lg font-bold">+1-365-292-6333</div>
 							</a>
 
 							{/* WhatsApp */}
 							<a
-								href="https://wa.me/966596237616"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="flex flex-col items-center text-center p-8 rounded-2xl hover:scale-105 transition-all group"
@@ -1335,12 +1420,12 @@ const SilverSeedLanding: React.FC = () => {
 									style={{ color: theme.mutedForeground }}>
 									WhatsApp
 								</div>
-								<div className="text-lg font-bold">+966-596-237-616</div>
+								<div className="text-lg font-bold">+1-365-292-6333</div>
 							</a>
 
 							{/* Email */}
 							<a
-								href="mailto:admin@silverseedinv.com"
+								href="mailto:info@silverseedinv.com"
 								className="flex flex-col items-center text-center p-8 rounded-2xl hover:scale-105 transition-all group"
 								style={{
 									backgroundColor: theme.card,
@@ -1360,7 +1445,7 @@ const SilverSeedLanding: React.FC = () => {
 									Email Us
 								</div>
 								<div className="text-lg font-bold break-all">
-									admin@silverseedinv.com
+									info@silverseedinv.com
 								</div>
 							</a>
 						</div>
@@ -1388,10 +1473,8 @@ const SilverSeedLanding: React.FC = () => {
 								your goals and explore opportunities.
 							</p>
 
-							<a
-								href="https://calendly.com/silverseedinvestments"
-								target="_blank"
-								rel="noopener noreferrer"
+							<button
+								onClick={() => setShowCalendar(true)}
 								className="inline-flex items-center gap-3 px-10 py-5 rounded-xl font-bold text-xl transition-all hover:scale-105 shadow-2xl"
 								style={{ backgroundColor: theme.primary, color: "#ffffff" }}
 								onMouseEnter={(e) => {
@@ -1402,9 +1485,9 @@ const SilverSeedLanding: React.FC = () => {
 										"0 8px 20px rgba(0,0,0,0.3)";
 								}}>
 								<Calendar className="h-6 w-6" />
-								Book Your Call Now
+								Book Your FREE Consultation Today
 								<ArrowRight className="h-6 w-6" />
-							</a>
+							</button>
 
 							<p
 								className="text-sm mt-6"
@@ -1417,6 +1500,60 @@ const SilverSeedLanding: React.FC = () => {
 			</section>
 
 			<Footer />
+
+			{/* Calendar Modal - Embedded in Page */}
+			{showCalendar && (
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+					onClick={() => setShowCalendar(false)}>
+					<motion.div
+						initial={{ scale: 0.9, opacity: 0 }}
+						animate={{ scale: 1, opacity: 1 }}
+						exit={{ scale: 0.9, opacity: 0 }}
+						className="relative w-full max-w-4xl rounded-2xl overflow-hidden shadow-2xl"
+						style={{ backgroundColor: theme.background }}
+						onClick={(e) => e.stopPropagation()}>
+						{/* Close Button */}
+						<button
+							onClick={() => setShowCalendar(false)}
+							className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110"
+							style={{
+								backgroundColor: "#EF4444",
+								color: "#ffffff",
+							}}
+							aria-label="Close calendar">
+							<span className="text-2xl font-bold">×</span>
+						</button>
+
+						{/* Calendar Header */}
+						<div
+							className="p-6 border-b"
+							style={{
+								backgroundColor: theme.primary,
+								borderColor: theme.border,
+							}}>
+							<h3 className="text-2xl font-bold text-white text-center">
+								Schedule Your Free Consultation
+							</h3>
+							<p className="text-white/90 text-center mt-2">
+								Book a 30-minute call with our investment experts
+							</p>
+						</div>
+
+						{/* Google Calendar Iframe */}
+						<div className="w-full" style={{ height: "600px" }}>
+							<iframe
+								src="https://calendar.app.google/B1bjFky7pVrc1zTJ8"
+								className="w-full h-full border-0"
+								title="Book a consultation with Silver Seed Investments"
+							/>
+						</div>
+					</motion.div>
+				</motion.div>
+			)}
 		</div>
 	);
 };

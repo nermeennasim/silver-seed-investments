@@ -2,6 +2,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { useTheme } from "../contexts/ThemeContext";
 import { ExternalLink, Phone, Mail, MapPin } from "lucide-react";
 
@@ -12,9 +13,10 @@ const Footer: React.FC = () => {
 
 	const quickLinks = [
 		{ label: "Home", href: "#hero" },
-		{ label: "Why Us", href: "#why-us" },
+		{ label: "About", href: "#about" },
 		{ label: "Services", href: "#services" },
-		{ label: "Results", href: "#results" },
+		{ label: "ROI & Results", href: "#roi-case-studies" },
+		{ label: "Team", href: "#team" },
 		{ label: "Contact", href: "#contact" },
 	];
 
@@ -22,14 +24,14 @@ const Footer: React.FC = () => {
 		{
 			icon: Phone,
 			label: "Phone",
-			value: "+1-437-984-1806",
-			href: "tel:+14379841806",
+			value: "+1-365-292-6333",
+			href: "tel:+13652926333",
 		},
 		{
 			icon: Mail,
 			label: "Email",
-			value: "admin@silverseedinv.com",
-			href: "mailto:admin@silverseedinv.com",
+			value: "info@silverseedinv.com",
+			href: "mailto:info@silverseedinv.com",
 		},
 		{
 			icon: MapPin,
@@ -59,36 +61,24 @@ const Footer: React.FC = () => {
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
 					{/* Company Info */}
 					<div className="lg:col-span-2">
-						<div className="flex items-center space-x-3 mb-6">
-							<div
-								className="p-2 rounded-lg flex items-center justify-center border-2"
-								style={{ borderColor: theme.primary }}>
-								{/* Logo with fallback */}
-								<img
-									src="/logo_3d.png"
-									alt="Silver Seed Investment Logo"
-									className="h-14 w-full object-contain"
-									// style={{
-									// 	filter: "brightness(0) invert(1)",
-									// 	maxWidth: "100%",
-									// 	height: "auto",
-									// }}
-									onError={(e) => {
-										const target = e.target as HTMLImageElement;
-										target.style.display = "none";
-										const parent = target.parentElement;
-										if (parent && !parent.querySelector(".fallback-icon")) {
-											const icon = document.createElement("div");
-											icon.className = "fallback-icon";
-											icon.innerHTML = `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.background}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12h4"/><path d="M6 8h4"/><path d="M6 16h4"/><path d="M14 12h4"/><path d="M14 16h4"/><path d="M14 8h4"/></svg>`;
-											parent.appendChild(icon);
-										}
-									}}
-								/>
-							</div>
-							<span
-								className="font-bold text-xl"
-								style={{ color: theme.foreground }}>
+					<div className="flex items-center space-x-3 mb-6">
+						<div
+							className="p-2 rounded-lg flex items-center justify-center border-2"
+							style={{ borderColor: theme.primary }}>
+							{/* Logo with fallback */}
+							<Image
+								src="/logo_3d.png"
+								alt="Silver Seed Investment Logo"
+								width={56}
+								height={56}
+								className="h-14 w-14 object-contain"
+								loading="lazy"
+								style={{ width: 'auto', height: '56px' }}
+							/>
+						</div>
+						<span
+							className="font-bold text-xl"
+							style={{ color: theme.foreground }}>
 								Silver Seed Investment
 							</span>
 						</div>

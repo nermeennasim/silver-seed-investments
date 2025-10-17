@@ -1,0 +1,14 @@
+# Silver Seed Investments - Robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.silverseedinv.com/sitemap.xml
+
+# Disallow admin or sensitive areas (if any in future)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

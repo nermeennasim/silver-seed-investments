@@ -1,19 +1,18 @@
 // src/app/not-found.tsx
 "use client";
-
 import React from "react";
-import { useTheme } from "./contexts/ThemeContext";
-import { Home, ArrowLeft, Search, Building2 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Building2, Home, ArrowLeft, Search } from "lucide-react";
+import { useTheme } from "./contexts/ThemeContext";
 
-const NotFound: React.FC = () => {
+function NotFound() {
 	const { theme } = useTheme();
 
 	const fadeInUp = {
 		initial: { opacity: 0, y: 20 },
 		animate: { opacity: 1, y: 0 },
-		transition: { duration: 0.6 },
+		transition: { duration: 0.5 },
 	};
 
 	return (
@@ -158,6 +157,8 @@ const NotFound: React.FC = () => {
 			</div>
 		</div>
 	);
-};
+	
+}
 
 export default NotFound;
+

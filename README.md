@@ -11,7 +11,7 @@ _Your Partner in Building Financial Freedom through Smart Real Estate Investment
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 
-[🌐 Live Demo](https://silverseedinv.com) • [📧 Contact Us](mailto:admin@silverseedinv.com) • [📱 WhatsApp](https://wa.me/966596237616)
+[🌐 Live Demo](https://silverseedinv.com) • [📧 Contact Us](mailto:info@silverseedinv.com) • [📱 WhatsApp](https://wa.me/3652926333)
 
 </div>
 
@@ -262,9 +262,9 @@ Import from GitHub<br/>and configure
 Create a `.env.local` file:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://yourdomain.com
-NEXT_PUBLIC_CONTACT_EMAIL=admin@silverseedinv.com
-NEXT_PUBLIC_PHONE=+1-437-984-1806
+NEXT_PUBLIC_SITE_URL=https://silverseedinv.com
+NEXT_PUBLIC_CONTACT_EMAIL=info@silverseedinv.com
+NEXT_PUBLIC_PHONE=+1-365-292-6333
 ```
 
 ### Customization Options
@@ -320,9 +320,9 @@ We welcome contributions! Here's how:
 
 ### Silver Seed Investments
 
-📞 **Office:** [+1-437-984-1806](tel:+14379841806)  
-💬 **WhatsApp:** [+966-596-237-616](https://wa.me/966596237616)  
-📧 **Email:** [admin@silverseedinv.com](mailto:admin@silverseedinv.com)  
+📞 **Office:** [+1-365-292-6333](tel:+13652926333)  
+💬 **WhatsApp:** [+1-365-292-6333](https://wa.me/+13652926333)  
+📧 **Email:** [info@silverseedinv.com](mailto:info@silverseedinv.com)  
 🌐 **Website:** [www.SilverSeedInv.com](https://www.silverseedinv.com)
 
 **Project Repository:** [github.com/nermeennasim/silver-seed-investments](https://github.com/nermeennasim/silver-seed-investments)

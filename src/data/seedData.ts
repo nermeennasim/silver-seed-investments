@@ -31,9 +31,9 @@ export const siteData = {
     
     // Contact details
     contact: {
-      phone: "+1-437-984-1806",
-      whatsapp: "+966-596-237-616", 
-      email: "admin@silverseedinv.com",
+      phone: "+1-365-292-6333",
+      whatsapp: "+1-365-292-6333", 
+      email: "info@silverseedinv.com",
       website: "www.SilverSeedInv.com",
       address: "6894, Barrisdale Drive, Mississauga, Ontario"
     },
@@ -465,6 +465,7 @@ export const siteData = {
           title: "Off-Market Deals",
           icon: Search,
           description: "Properties not publicly listed, reducing competition",
+          backgroundImage: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
           benefits: [
             "Lower purchase prices (10-20% below market)",
             "Less bidding wars",
@@ -478,6 +479,7 @@ export const siteData = {
           title: "Value-Add Properties",
           icon: TrendingUp,
           description: "Properties with renovation or improvement potential",
+          backgroundImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800",
           benefits: [
             "Force appreciation through improvements",
             "Increase rental income potential",
@@ -491,6 +493,7 @@ export const siteData = {
           title: "Emerging Markets",
           icon: Target,
           description: "Growing areas with strong appreciation potential",
+          backgroundImage: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800",
           benefits: [
             "Lower entry prices",
             "High growth trajectory",
@@ -504,6 +507,7 @@ export const siteData = {
           title: "Cash Flow Properties",
           icon: DollarSign,
           description: "High rental yield properties with consistent income",
+          backgroundImage: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800",
           benefits: [
             "Immediate positive cash flow",
             "Passive income stream",
@@ -517,6 +521,7 @@ export const siteData = {
           title: "Short-Term Rentals (Airbnb)",
           icon: Home,
           description: "Premium locations optimized for vacation rentals",
+          backgroundImage: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
           benefits: [
             "Higher nightly rates",
             "Flexible usage (personal + rental)",
@@ -710,40 +715,185 @@ export const siteData = {
   faq: {
     title: "Frequently Asked Questions",
     subtitle: "Everything you need to know about investing with Silver Seed",
-    
+
     categories: [
       {
         category: "Getting Started",
         questions: [
           {
-            question: "What is the minimum investment?",
-            answer: "The minimum investment is $1,000. For investments over $50,000, we use lawyers' trust accounts for additional security.",
+            question: "What is the minimum investment amount?",
+            answer: "The minimum investment is $1,000, making real estate investment accessible to a wide range of investors. For investments over $50,000, we use lawyers' trust accounts for additional security and peace of mind.",
             tags: ["minimum", "investment", "security"]
           },
           {
-            question: "How do I get started?",
-            answer: "Simply contact us to discuss your investment goals. We'll guide you through our project selection process and help you choose the right opportunity.",
-            tags: ["getting-started", "process"]
+            question: "How do I get started with SSI?",
+            answer: "Getting started is simple! Contact us via phone (+1-365-292-6333), WhatsApp, or email to schedule a free consultation. We'll discuss your investment goals, risk tolerance, and available opportunities. Our team will guide you through the entire process from property selection to closing.",
+            tags: ["getting-started", "process", "consultation"]
+          },
+          {
+            question: "Do I need previous real estate investment experience?",
+            answer: "Not at all! That's the beauty of partnering with SSI. Whether you're a first-time investor or an experienced portfolio builder, our expert team handles all aspects of property acquisition, management, and optimization. We educate you throughout the process.",
+            tags: ["experience", "beginner", "education"]
+          },
+          {
+            question: "What documents do I need to invest?",
+            answer: "You'll need government-issued ID, proof of funds, and for investments over $50,000, we may require additional verification. Our team will guide you through the documentation process and ensure everything is properly handled by qualified lawyers.",
+            tags: ["documents", "requirements", "legal"]
           }
         ]
       },
       {
-        category: "Returns & Fees", 
+        category: "Returns & Fees",
         questions: [
           {
-            question: "What returns can I expect?",
-            answer: "Our historical performance shows 18-22% annualized returns. However, past performance doesn't guarantee future results.",
-            tags: ["returns", "performance"]
+            question: "What returns can I realistically expect?",
+            answer: "Our historical performance shows 20-37% annualized ROI from 2020-2024, significantly outperforming market averages of 8-10%. However, past performance doesn't guarantee future results. Returns vary based on investment type: off-market deals (18-22%), rental properties (27-29%), renovation projects (21-37% annualized), and Airbnb models (27-31%).",
+            tags: ["returns", "performance", "roi"]
           },
           {
-            question: "What are your fees?",
-            answer: "We take 12.5% ownership in properties as our service fee. Our interests are aligned - we only profit when you profit.",
-            tags: ["fees", "structure"]
+            question: "What are your management fees?",
+            answer: "We take a 12.5% ownership stake in properties as our service fee. This means our interests are perfectly aligned with yours - we only profit when you profit. Unlike traditional REITs charging 2-3% annually regardless of performance, we're invested in your success.",
+            tags: ["fees", "structure", "ownership"]
+          },
+          {
+            question: "Are there any hidden fees?",
+            answer: "Absolutely not. We believe in complete transparency. Our 12.5% ownership stake covers all property management, tenant screening, maintenance coordination, tax optimization, and strategic planning. You'll never receive surprise bills or hidden charges.",
+            tags: ["fees", "transparency", "hidden-costs"]
+          },
+          {
+            question: "How does the 12.5% ownership structure work?",
+            answer: "When you invest in a property with SSI, we take 12.5% ownership while you own 87.5%. This means we share proportionally in all income, appreciation, and expenses. Our skin-in-the-game approach ensures we're motivated to maximize your returns since our success is directly tied to yours.",
+            tags: ["ownership", "structure", "partnership"]
+          }
+        ]
+      },
+      {
+        category: "Investment Strategy",
+        questions: [
+          {
+            question: "What types of properties do you invest in?",
+            answer: "We focus on five proven strategies: (1) Off-market deals below market value, (2) Value-add properties with renovation potential, (3) Cash flow rental properties, (4) Short-term/Airbnb rentals in premium locations, and (5) Multi-unit properties. Each is selected based on strong ROI potential and market fundamentals.",
+            tags: ["strategy", "property-types", "diversification"]
+          },
+          {
+            question: "What regions do you invest in?",
+            answer: "We primarily focus on high-growth markets in Canada (Ontario, Alberta, Nova Scotia, British Columbia) and select US markets (Niagara Falls, Buffalo). Our team conducts thorough market research analyzing population growth, rental demand, employment trends, and appreciation potential.",
+            tags: ["regions", "markets", "geography"]
+          },
+          {
+            question: "How do you find off-market deals?",
+            answer: "Our extensive network includes wholesalers, realtors, mortgage brokers, and direct-to-seller marketing campaigns. This gives us access to properties before they hit the public market, reducing competition and allowing us to negotiate better prices - typically 10-20% below market value.",
+            tags: ["off-market", "deal-sourcing", "strategy"]
+          },
+          {
+            question: "Can I choose which property to invest in?",
+            answer: "Yes! We present vetted opportunities to you with complete details including location, financials, ROI projections, and risk analysis. You have final approval on which properties to invest in. We never force or pressure you into any investment decision.",
+            tags: ["choice", "control", "approval"]
+          }
+        ]
+      },
+      {
+        category: "Property Management",
+        questions: [
+          {
+            question: "Who manages the properties?",
+            answer: "SSI handles all property management including tenant screening, rent collection, maintenance coordination, inspections, and emergency response. Since we own 12.5% of each property, we treat them as our own assets - because they are!",
+            tags: ["management", "services", "hands-on"]
+          },
+          {
+            question: "How do you screen tenants?",
+            answer: "We conduct comprehensive background checks including credit reports, employment verification, income validation, previous landlord references, and criminal history. Our thorough screening process significantly reduces the risk of problematic tenants and missed rent payments.",
+            tags: ["tenant-screening", "process", "risk-management"]
+          },
+          {
+            question: "What happens if there's a maintenance issue?",
+            answer: "We have a 24/7 emergency response system and a vetted network of contractors for all maintenance needs. Our preferred contractor relationships save an average of $8,000 annually in maintenance costs. We handle everything - you simply receive updates and approve major expenses.",
+            tags: ["maintenance", "contractors", "emergency"]
+          },
+          {
+            question: "How often will I receive updates on my investment?",
+            answer: "You'll receive monthly financial statements showing rental income, expenses, and net cash flow. We also provide quarterly performance reviews and are always available by phone, email, or WhatsApp for questions or updates anytime.",
+            tags: ["reporting", "communication", "transparency"]
+          }
+        ]
+      },
+      {
+        category: "Legal & Tax",
+        questions: [
+          {
+            question: "How is the investment legally structured?",
+            answer: "Properties are held in legal entities (LLC or Corporation) that we help you set up. This provides liability protection, tax optimization opportunities, and clear ownership structure. All agreements are reviewed by qualified real estate lawyers to protect your interests.",
+            tags: ["legal", "structure", "llc"]
+          },
+          {
+            question: "What tax benefits can I expect?",
+            answer: "Real estate investment offers numerous tax advantages including mortgage interest deductions, property tax deductions, depreciation benefits, renovation expense write-offs, and capital gains strategies. We work with tax professionals to optimize your tax position and maximize after-tax returns.",
+            tags: ["tax", "benefits", "deductions"]
+          },
+          {
+            question: "Do you handle tax filing?",
+            answer: "Yes! Our comprehensive service includes annual tax preparation and filing for your investment properties. We ensure all deductions are properly claimed and work with qualified accountants to optimize your tax strategy, saving you $1,200+ annually in accounting fees.",
+            tags: ["tax-filing", "accounting", "service"]
+          },
+          {
+            question: "What happens if I'm audited?",
+            answer: "Our meticulous record-keeping and professional tax preparation minimize audit risk. In the unlikely event of an audit, we provide all documentation and work with your accountant to respond to any inquiries. Proper legal structure and documentation provide strong audit protection.",
+            tags: ["audit", "protection", "documentation"]
+          }
+        ]
+      },
+      {
+        category: "Exit Strategy & Risk",
+        questions: [
+          {
+            question: "What is the typical investment timeline?",
+            answer: "This depends on your strategy. Flip/renovation projects: 6-12 months. Rental properties: 3-7 years to build equity through appreciation and mortgage paydown. Airbnb: 2-5 years. We discuss timeline expectations upfront and adjust strategy based on your financial goals.",
+            tags: ["timeline", "duration", "strategy"]
+          },
+          {
+            question: "Can I sell my investment before the planned timeline?",
+            answer: "Yes, though timing affects returns. We can facilitate early exit through property sale or by finding another investor to buy your stake. Keep in mind that real estate is less liquid than stocks, and selling early may mean missing out on appreciation and tax benefits.",
+            tags: ["exit", "selling", "liquidity"]
+          },
+          {
+            question: "What are the risks involved?",
+            answer: "All investments carry risk. Real estate risks include market downturns, tenant issues, unexpected repairs, and interest rate changes. We mitigate these through: thorough due diligence, conservative underwriting, property insurance, emergency reserves, professional management, and diversification across multiple properties and markets.",
+            tags: ["risk", "mitigation", "safety"]
+          },
+          {
+            question: "How do you protect my investment?",
+            answer: "Protection comes through multiple layers: (1) Comprehensive due diligence and inspections, (2) Title insurance and legal review, (3) Property insurance coverage, (4) Professional property management, (5) Emergency reserves for unexpected costs, (6) Our own capital invested alongside yours. We never compromise on safety or quality.",
+            tags: ["protection", "safety", "insurance"]
+          }
+        ]
+      },
+      {
+        category: "SSI Advantage",
+        questions: [
+          {
+            question: "What makes SSI different from a REIT or mutual fund?",
+            answer: "Unlike REITs charging 2-3% annually with zero control, SSI gives you: (1) Direct property ownership, (2) Success-based fees (12.5% only when profitable), (3) Full transparency, (4) Tax optimization benefits, (5) Higher returns (20-37% vs market 8-10%), and (6) Aligned interests through our ownership stake.",
+            tags: ["comparison", "reit", "advantage"]
+          },
+          {
+            question: "Why not just invest on my own (DIY)?",
+            answer: "DIY investing requires: extensive market knowledge, time for research and management, contractor networks, legal and tax expertise, and capital reserves for mistakes. SSI provides: decades of experience, proven track record, professional networks, time savings, and risk reduction through proper due diligence - all while investing alongside you.",
+            tags: ["diy", "comparison", "expertise"]
+          },
+          {
+            question: "What does 'skin in the game' really mean?",
+            answer: "It means we invest our own money right beside yours in every single deal. Our 12.5% ownership isn't just a fee - it's a partnership. We share in all profits, losses, and decisions. If the property succeeds, we succeed together. If it underperforms, we feel the same pain. This alignment is our strongest competitive advantage.",
+            tags: ["skin-in-game", "alignment", "partnership"]
+          },
+          {
+            question: "Can I see examples of past successful investments?",
+            answer: "Absolutely! Our case studies show: Off-market acquisition saved $22,800 (18% ROI), Renovation project netted 21% ROI (37% annualized), Rental property generating 29% ROI, and Airbnb model achieving 27% yield. We're happy to share detailed case studies and connect you with current investors during your consultation.",
+            tags: ["case-studies", "track-record", "proof"]
           }
         ]
       }
     ],
-    
+
     // Helper to get all questions
     getAllQuestions() {
       return this.categories.flatMap(cat => cat.questions);
@@ -856,7 +1006,7 @@ export const siteData = {
         location: "Dubai, UAE",
         role: "Business Owner",
         rating: 5,
-        image: "https://templatekit.jegtheme.com/cloudsion/wp-content/uploads/sites/383/2023/06/young-stylish-smiling-man-in-co-working-office-startup-freelancer-holding-using-tablet-e1686130822230.jpg",
+        image: "/testimonials/client-1.jpg",
         quote: "The skin-in-the-game approach means SSI's success is tied to mine. I've never felt more confident about my investments.",
         investment: "Rental portfolio",
         roi: "27% annualized"
@@ -1053,24 +1203,24 @@ export const siteData = {
         type: "phone",
         icon: "Phone",
         label: "Phone",
-        value: "+1-437-984-1806",
-        link: "tel:+14379841806",
+        value: "+1-365-292-6333",
+        link: "tel:+13652926333",
         primary: true
       },
       {
         type: "whatsapp",
         icon: "MessageCircle",
         label: "WhatsApp",
-        value: "+966-596-237-616",
-        link: "https://wa.me/966596237616",
+        value: "+1-365-292-6333",
+        link: "https://wa.me/3652926333",
         primary: true
       },
       {
         type: "email",
         icon: "Mail",
         label: "Email",
-        value: "admin@silverseedinv.com",
-        link: "mailto:admin@silverseedinv.com",
+        value: "info@silverseedinv.com",
+        link: "mailto:info@silverseedinv.com",
         primary: true
       },
       {

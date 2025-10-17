@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { useTheme } from "../contexts/ThemeContext";
 import { Menu, X, ChevronDown } from "lucide-react";
 
@@ -76,38 +77,23 @@ const Navigation: React.FC<NavigationProps> = ({
 			}}>
 			<div className="max-w-7xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
 				<div className="flex justify-between items-start h-20">
-					{/* Logo Section */}
-					<div className="flex items-center space-x-3">
-						<div
-							className="p-2 rounded-lg flex items-start justify-center"
-							style={{ border: `1px solid ${theme.border}` }}>
-							{/* Try to load logo, fallback to Building icon */}
-							<img
-								src="/logo_3d.png"
-								alt="Silver Seed Investment Logo"
-								className="h-14 w-full object-contain"
-								//	style={{
-								// 	filter: "brightness(0) invert(1)", // Makes logo white if it's dark
-								// 	maxWidth: "100%",
-								// 	height: "auto",
-								// }}
-								onError={(e) => {
-									// If logo fails to load, show Building icon instead
-									const target = e.target as HTMLImageElement;
-									target.style.display = "none";
-									const parent = target.parentElement;
-									if (parent && !parent.querySelector(".fallback-icon")) {
-										const icon = document.createElement("div");
-										icon.className = "fallback-icon";
-										icon.innerHTML = `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="${theme.background}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12h4"/><path d="M6 8h4"/><path d="M6 16h4"/><path d="M14 12h4"/><path d="M14 16h4"/><path d="M14 8h4"/></svg>`;
-										parent.appendChild(icon);
-									}
-								}}
-							/>
-						</div>
+				{/* Logo Section */}
+				<div className="flex items-center space-x-3">
+					<div
+						className="p-2 rounded-lg flex items-start justify-center"
+						style={{ border: `1px solid ${theme.border}` }}>
+						{/* Try to load logo, fallback to Building icon */}
+						<Image
+							src="/logo_3d.png"
+							alt="Silver Seed Investment Logo"
+							width={56}
+							height={56}
+							className="h-14 w-14 object-contain"
+							priority
+							style={{ width: 'auto', height: '56px' }}
+						/>
 					</div>
-
-					{/* Desktop Navigation */}
+				</div>					{/* Desktop Navigation */}
 					<div className="hidden lg:flex space-x-8 items-center py-4">
 						{navItems.map((item, index) => (
 							<div key={index} className="relative group">
