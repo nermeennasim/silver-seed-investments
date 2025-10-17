@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "../contexts/ThemeContext";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
 	ArrowRight,
 	CheckCircle2,
@@ -13,6 +13,7 @@ import {
 	Star,
 	Users,
 	Calendar,
+	X,
 } from "lucide-react";
 import {
 	BarChart,
@@ -1499,9 +1500,10 @@ const SilverSeedLanding: React.FC = () => {
 				</div>
 			</section>
 
-			<Footer />
+		<Footer />
 
-			{/* Calendar Modal - Embedded in Page */}
+		{/* Calendar Modal - Embedded in Page */}
+		<AnimatePresence>
 			{showCalendar && (
 				<motion.div
 					initial={{ opacity: 0 }}
@@ -1519,16 +1521,14 @@ const SilverSeedLanding: React.FC = () => {
 						{/* Close Button */}
 						<button
 							onClick={() => setShowCalendar(false)}
-							className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110"
+							className="absolute top-4 right-4 z-[10000] w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-110 hover:rotate-90 shadow-lg"
 							style={{
 								backgroundColor: "#EF4444",
 								color: "#ffffff",
 							}}
 							aria-label="Close calendar">
-							<span className="text-2xl font-bold">×</span>
-						</button>
-
-						{/* Calendar Header */}
+							<X className="w-6 h-6" strokeWidth={3} />
+						</button>						{/* Calendar Header */}
 						<div
 							className="p-6 border-b"
 							style={{
@@ -1554,8 +1554,9 @@ const SilverSeedLanding: React.FC = () => {
 					</motion.div>
 				</motion.div>
 			)}
-		</div>
-	);
+		</AnimatePresence>
+	</div>
+);
 };
 
 export default SilverSeedLanding;
