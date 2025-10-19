@@ -2071,7 +2071,7 @@ const SilverSeedLanding: React.FC = () => {
 							<p
 								className="text-lg mb-8 max-w-2xl mx-auto"
 								style={{ color: theme.mutedForeground }}>
-								Book a 30-minute call with our investment experts to discuss
+								Book a 15-minute call with our investment experts to discuss
 								your goals and explore opportunities.
 							</p>
 
