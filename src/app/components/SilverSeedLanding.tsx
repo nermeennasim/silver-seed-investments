@@ -2140,7 +2140,7 @@ const SilverSeedLanding: React.FC = () => {
 								Schedule Your Free Consultation
 							</h3>
 							<p className="text-white/90 text-center mt-2">
-								Book a 30-minute call with our investment experts
+								Book a 15-minute call with our investment experts
 							</p>
 						</div>
 
