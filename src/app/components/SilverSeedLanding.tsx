@@ -1,4 +1,5 @@
 "use client";
+// Updated: Added expandable property analysis section
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -14,6 +15,11 @@ import {
 	Users,
 	Calendar,
 	X,
+	ChevronDown,
+	ChevronUp,
+	Play,
+	Image as ImageIcon,
+	HelpCircle,
 } from "lucide-react";
 import {
 	BarChart,
@@ -35,6 +41,10 @@ const SilverSeedLanding: React.FC = () => {
 	const [activeSection, setActiveSection] = useState<string>("hero");
 	const [mounted, setMounted] = useState<boolean>(false);
 	const [showCalendar, setShowCalendar] = useState<boolean>(false);
+	const [expandedProperty, setExpandedProperty] = useState<string | null>(null);
+	const [selectedMedia, setSelectedMedia] = useState<string | null>(null);
+	const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
+	const [expandedFAQ, setExpandedFAQ] = useState<string | null>(null);
 
 	useEffect(() => {
 		setMounted(true);
@@ -45,6 +55,7 @@ const SilverSeedLanding: React.FC = () => {
 			const sections = [
 				"hero",
 				"about",
+				"gallery",
 				"how-we-work",
 				"services",
 				"roi-case-studies",
@@ -52,6 +63,7 @@ const SilverSeedLanding: React.FC = () => {
 				"testimonials",
 				"why-invest",
 				"track-record",
+				"faq",
 				"contact",
 			];
 			const scrollPosition = window.scrollY + 100;
@@ -401,6 +413,142 @@ const SilverSeedLanding: React.FC = () => {
 				</div>
 			</section>
 
+			{/* Property Gallery Section */}
+			<section
+				id="gallery"
+				className="py-20 px-4"
+				style={{ backgroundColor: theme.background }}>
+				<div className="max-w-7xl mx-auto">
+					<motion.div className="text-center mb-16" {...fadeInUp}>
+						<h2 className="text-4xl md:text-5xl font-bold mb-4">
+							Property Gallery
+						</h2>
+						<p className="text-xl max-w-3xl mx-auto" style={{ color: theme.mutedForeground }}>
+							Explore our portfolio of investment properties and renovation projects
+						</p>
+					</motion.div>
+
+					{/* Gallery Grid - Responsive: 1 col mobile, 2 cols sm, 3 cols md, 4 cols lg */}
+					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+						{[
+							{ type: 'video', src: 'https://res.cloudinary.com/dxlhnxle0/video/upload/v1760849236/video_renovation_phyg11.mp4', alt: 'Renovation Project', label: 'Renovation Project' },
+							{ type: 'image', src: 'https://res.cloudinary.com/dxlhnxle0/image/upload/v1760849229/01_teocxc.png', alt: 'Property Investment 1' },
+							{ type: 'image', src: 'https://res.cloudinary.com/dxlhnxle0/image/upload/v1760849232/02_vvlxb2.png', alt: 'Property Investment 2' },
+							{ type: 'image', src: 'https://res.cloudinary.com/dxlhnxle0/image/upload/v1760849230/03_sh9l54.png', alt: 'Property Investment 3' },
+							{ type: 'image', src: 'https://res.cloudinary.com/dxlhnxle0/image/upload/v1760849232/04_pvmqjq.png', alt: 'Property Investment 4' },
+							{ type: 'image', src: 'https://res.cloudinary.com/dxlhnxle0/image/upload/v1760849233/05_cxkzd3.png', alt: 'Property Investment 5' },
+							{ type: 'image', src: 'https://res.cloudinary.com/dxlhnxle0/image/upload/v1760849233/06_wgmiwy.png', alt: 'Property Investment 6' },
+							{ type: 'image', src: 'https://res.cloudinary.com/dxlhnxle0/image/upload/v1760849229/07_jr599c.png', alt: 'Property Investment 7' },
+							{ type: 'image', src: 'https://res.cloudinary.com/dxlhnxle0/image/upload/v1760849230/08_vw5oye.png', alt: 'Property Investment 8' },
+							{ type: 'image', src: 'https://res.cloudinary.com/dxlhnxle0/image/upload/v1760850664/niagra_falls_usa_dxgbeg.jpg', alt: 'Niagara Falls USA Property', label: 'Niagara Falls, USA' },
+							{ type: 'image', src: 'https://res.cloudinary.com/dxlhnxle0/image/upload/v1760850664/niagra_falls_usa2_rebkbr.jpg', alt: 'Niagara Falls USA Property 2', label: 'Niagara Falls, USA' },
+						].map((media, index) => (
+							<motion.div
+								key={index}
+								{...fadeInUp}
+								className="relative group rounded-2xl overflow-hidden cursor-pointer aspect-square hover:scale-105 transition-transform"
+								style={{
+									backgroundColor: theme.card,
+									border: `2px solid ${theme.border}`,
+								}}
+								onClick={() => {
+									setSelectedMedia(media.src);
+									if (media.type === 'video') setIsVideoPlaying(true);
+								}}>
+								{media.type === 'video' ? (
+									<>
+										<video
+											className="w-full h-full object-cover"
+											muted
+											loop
+											playsInline>
+											<source src={media.src} type="video/mp4" />
+										</video>
+										<div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all flex items-center justify-center">
+											<Play className="w-16 h-16 text-white opacity-90 group-hover:scale-110 transition-transform" fill="white" />
+										</div>
+									</>
+								) : (
+									<>
+										<Image
+											src={media.src}
+											alt={media.alt}
+											width={400}
+											height={400}
+											className="w-full h-full object-cover"
+										/>
+										<div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all" />
+									</>
+								)}
+								{media.label && (
+									<div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+										<p className="text-white font-semibold text-sm">{media.label}</p>
+									</div>
+								)}
+							</motion.div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* Media Lightbox Modal */}
+			<AnimatePresence>
+				{selectedMedia && (
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+						onClick={() => {
+							setSelectedMedia(null);
+							setIsVideoPlaying(false);
+						}}>
+						<motion.div
+							initial={{ scale: 0.9, opacity: 0 }}
+							animate={{ scale: 1, opacity: 1 }}
+							exit={{ scale: 0.9, opacity: 0 }}
+							className="relative max-w-5xl w-full"
+							onClick={(e) => e.stopPropagation()}>
+							{/* Close Button */}
+							<button
+								onClick={() => {
+									setSelectedMedia(null);
+									setIsVideoPlaying(false);
+								}}
+								className="absolute -top-12 right-0 w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110 z-10"
+								style={{
+									backgroundColor: "#EF4444",
+									color: "#ffffff",
+								}}
+								aria-label="Close media">
+								<X className="w-6 h-6" strokeWidth={3} />
+							</button>
+
+							{/* Media Content */}
+							<div className="rounded-2xl overflow-hidden shadow-2xl">
+								{selectedMedia.includes('.mp4') ? (
+									<video
+										className="w-full h-auto max-h-[80vh]"
+										controls
+										autoPlay={isVideoPlaying}
+										playsInline>
+										<source src={selectedMedia} type="video/mp4" />
+									</video>
+								) : (
+									<Image
+										src={selectedMedia}
+										alt="Property Detail"
+										width={1200}
+										height={800}
+										className="w-full h-auto max-h-[80vh] object-contain"
+									/>
+								)}
+							</div>
+						</motion.div>
+					</motion.div>
+				)}
+			</AnimatePresence>
+
 			{/* How We Work Section */}
 			<section id="how-we-work" className="py-20 px-4">
 				<div className="max-w-7xl mx-auto">
@@ -413,57 +561,102 @@ const SilverSeedLanding: React.FC = () => {
 						</p>
 					</motion.div>
 
-					<div className="space-y-8">
-						{siteData.howWeWork.steps.map((step) => {
+					<div className="relative max-w-5xl mx-auto">
+						{/* Vertical connecting line for desktop */}
+						<div
+							className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2"
+							style={{
+								background: `linear-gradient(to bottom, ${theme.primary}40, ${theme.accent}60)`,
+							}}
+						/>
+
+						{siteData.howWeWork.steps.map((step, index) => {
 							const Icon = step.icon;
+							const isEven = index % 2 === 0;
+
 							return (
-								<div
+								<motion.div
 									key={step.id}
-									className="rounded-2xl p-8 border-2"
-									style={{
-										backgroundColor: theme.card,
-										borderColor: theme.border,
-									}}>
-									<div className="flex flex-col md:flex-row gap-6">
-										<div className="flex-shrink-0">
+									initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+									whileInView={{ opacity: 1, x: 0 }}
+									viewport={{ once: true }}
+									transition={{ duration: 0.5, delay: index * 0.1 }}
+									className="relative mb-12 md:mb-16 last:mb-0">
+									{/* Step Number Circle - centered on line for desktop */}
+									<div
+										className={`hidden md:flex absolute left-1/2 top-0 -translate-x-1/2 w-20 h-20 rounded-full items-center justify-center font-bold text-3xl shadow-lg z-10 border-4`}
+										style={{
+											backgroundColor: theme.primary,
+											color: "#ffffff",
+											borderColor: theme.background,
+										}}>
+										{step.id}
+									</div>
+
+									{/* Content Card */}
+									<div
+										className={`md:w-[calc(50%-60px)] ${
+											isEven ? "md:mr-auto md:pr-16" : "md:ml-auto md:pl-16"
+										}`}>
+										<div
+											className="rounded-2xl p-6 md:p-8 border-2 shadow-lg relative"
+											style={{
+												backgroundColor: theme.card,
+												borderColor: theme.border,
+											}}>
+											{/* Mobile step number (shown only on mobile) */}
 											<div
-												className="w-16 h-16 rounded-xl flex items-center justify-center font-bold text-2xl"
+												className="md:hidden w-16 h-16 rounded-xl flex items-center justify-center font-bold text-2xl mb-4 mx-auto"
 												style={{
 													backgroundColor: theme.primary,
 													color: "#ffffff",
 												}}>
 												{step.id}
 											</div>
-										</div>
 
-										<div className="flex-1">
+											{/* Arrow pointing to center line (desktop only) */}
+											<div
+												className={`hidden md:block absolute top-8 ${
+													isEven ? "right-0 translate-x-full" : "left-0 -translate-x-full"
+												} w-12 h-0.5`}
+												style={{ backgroundColor: theme.primary }}
+											/>
+
+											{/* Icon and Title */}
 											<div className="flex items-start gap-4 mb-4">
-												<Icon
-													className="h-8 w-8 flex-shrink-0"
-													style={{ color: theme.primary }}
-												/>
-												<div>
+												<div
+													className="flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center"
+													style={{
+														backgroundColor: `${theme.accent}30`,
+													}}>
+													<Icon
+														className="h-7 w-7"
+														style={{ color: theme.primary }}
+													/>
+												</div>
+												<div className="flex-1">
 													<h3 className="text-2xl font-bold mb-2">
 														{step.title}
 													</h3>
-													<p className="text-lg">{step.description}</p>
+													<p className="text-lg opacity-90">{step.description}</p>
 												</div>
 											</div>
 
-											<ul className="grid md:grid-cols-2 gap-3 ml-12">
+											{/* Details List */}
+											<ul className="grid md:grid-cols-2 gap-3 mt-6">
 												{step.details.map((detail, i) => (
 													<li key={i} className="flex items-start gap-2">
 														<CheckCircle2
 															className="h-5 w-5 flex-shrink-0 mt-0.5"
 															style={{ color: theme.accent }}
 														/>
-														<span>{detail}</span>
+														<span className="text-sm md:text-base">{detail}</span>
 													</li>
 												))}
 											</ul>
 										</div>
 									</div>
-								</div>
+								</motion.div>
 							);
 						})}
 					</div>
@@ -638,6 +831,208 @@ const SilverSeedLanding: React.FC = () => {
 								</motion.div>
 							);
 						})}
+					</div>
+
+					{/* Detailed Property Analysis - Expandable */}
+					<div className="mb-16">
+						<motion.div
+							{...fadeInUp}
+							className="rounded-2xl overflow-hidden backdrop-blur-sm"
+							style={{
+								backgroundColor: "rgba(255, 255, 255, 0.95)",
+								border: `2px solid ${theme.primary}`,
+								boxShadow: `0 8px 30px rgba(0,0,0,0.3)`,
+							}}>
+							{/* Header - Clickable */}
+							<button
+								onClick={() => setExpandedProperty(expandedProperty === 'willow' ? null : 'willow')}
+								className="w-full p-6 md:p-8 flex items-center justify-between hover:bg-opacity-50 transition-all"
+								style={{
+									backgroundColor: theme.primary + "10",
+								}}>
+								<div className="text-left">
+									<h3 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: theme.primary }}>
+										Detailed Investment Analysis
+									</h3>
+									<p className="text-lg" style={{ color: theme.foreground }}>
+										1338 Willow Ave - 4 Bed, 2 Bath, 2 Unit Building
+									</p>
+									<p className="text-sm mt-1" style={{ color: theme.mutedForeground }}>
+										Niagara Falls, NY 14301, USA
+									</p>
+								</div>
+								<div className="flex-shrink-0 ml-4">
+									{expandedProperty === 'willow' ? (
+										<ChevronUp className="w-8 h-8" style={{ color: theme.primary }} />
+									) : (
+										<ChevronDown className="w-8 h-8" style={{ color: theme.primary }} />
+									)}
+								</div>
+							</button>
+
+							{/* Expandable Content */}
+							<AnimatePresence>
+								{expandedProperty === 'willow' && (
+									<motion.div
+										initial={{ height: 0, opacity: 0 }}
+										animate={{ height: 'auto', opacity: 1 }}
+										exit={{ height: 0, opacity: 0 }}
+										transition={{ duration: 0.3 }}
+										className="overflow-hidden">
+										<div className="p-6 md:p-8 space-y-8">
+											{/* Property Details Section */}
+											<div>
+												<h4 className="text-xl font-bold mb-4 pb-2 border-b-2" style={{ color: theme.primary, borderColor: theme.primary }}>
+													Property Details
+												</h4>
+												<div className="grid md:grid-cols-2 gap-4">
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Property Address</span>
+														<span className="font-semibold text-right" style={{ color: theme.foreground }}>1338 Willow Ave, Niagara Falls, NY</span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Property Type</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>2 Unit Building / 4bd 2br</span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Bedrooms</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>4</span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Bathrooms</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>2</span>
+													</div>
+												</div>
+											</div>
+
+											{/* Financial Overview Section */}
+											<div>
+												<h4 className="text-xl font-bold mb-4 pb-2 border-b-2" style={{ color: theme.primary, borderColor: theme.primary }}>
+													Financial Overview
+												</h4>
+												<div className="grid md:grid-cols-2 gap-4">
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>List Price</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>$105,000</span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Market Price</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>$105,000</span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Expected Purchase Price</span>
+														<span className="font-semibold text-green-600">$95,000</span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Closing Costs</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>$1,500</span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Cap Expenditure Est.</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>$16,000</span>
+													</div>
+													<div className="flex justify-between py-2 border-b font-bold" style={{ borderColor: theme.primary }}>
+														<span style={{ color: theme.primary }}>Total Acquisition Cost</span>
+														<span style={{ color: theme.primary }}>$112,500</span>
+													</div>
+													<div className="flex justify-between py-2 border-b md:col-span-2" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Max Monthly Rent</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>$29,400 <span className="text-sm" style={{ color: theme.mutedForeground }}>(per year)</span></span>
+													</div>
+												</div>
+											</div>
+
+											{/* Investment Returns Section */}
+											<div>
+												<h4 className="text-xl font-bold mb-4 pb-2 border-b-2" style={{ color: theme.primary, borderColor: theme.primary }}>
+													Investment Returns
+												</h4>
+												<div className="grid md:grid-cols-2 gap-4">
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Investor Return (sub SSI)</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>$25,725 <span className="text-sm" style={{ color: theme.mutedForeground }}>(annual)</span></span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Investor Rent % (sub SSI)</span>
+														<span className="font-semibold text-green-600">23%</span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Est. Capital Gain (3yr)</span>
+														<span className="font-semibold text-green-600">20%</span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Potential RoI (3yr sub SSI)</span>
+														<span className="font-semibold text-green-600">29%</span>
+													</div>
+													<div className="flex justify-between py-2 border-b font-bold text-lg" style={{ borderColor: theme.primary }}>
+														<span style={{ color: theme.primary }}>3yr RoI (est. sub SSI)</span>
+														<span className="text-green-600">73%</span>
+													</div>
+													<div className="flex justify-between py-2 border-b font-bold text-lg" style={{ borderColor: theme.primary }}>
+														<span style={{ color: theme.primary }}>Total Annual Return</span>
+														<span className="text-green-600">24%</span>
+													</div>
+												</div>
+											</div>
+
+											{/* Recurring Expenses Section */}
+											<div>
+												<h4 className="text-xl font-bold mb-4 pb-2 border-b-2" style={{ color: theme.primary, borderColor: theme.primary }}>
+													Recurring Expenses
+												</h4>
+												<div className="grid md:grid-cols-2 gap-4">
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Annual Property Tax</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>$804</span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Brokerage Estimate</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>$1,300</span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Maintenance Est.</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>$500</span>
+													</div>
+													<div className="flex justify-between py-2 border-b" style={{ borderColor: theme.border }}>
+														<span style={{ color: theme.mutedForeground }}>Annual EBIT (sub SSI)</span>
+														<span className="font-semibold" style={{ color: theme.foreground }}>$23,121</span>
+													</div>
+													<div className="flex justify-between py-2 border-b font-bold" style={{ borderColor: theme.primary }}>
+														<span style={{ color: theme.primary }}>After Tax Income (sub SSI)</span>
+														<span style={{ color: theme.primary }}>$20,809</span>
+													</div>
+													<div className="flex justify-between py-2 border-b font-bold" style={{ borderColor: theme.primary }}>
+														<span style={{ color: theme.primary }}>Annual RoI (sub SSI)</span>
+														<span className="text-green-600 text-xl">18%</span>
+													</div>
+												</div>
+											</div>
+
+											{/* Summary Highlights */}
+											<div className="rounded-xl p-6" style={{ backgroundColor: theme.primary + "10" }}>
+												<h4 className="text-lg font-bold mb-3" style={{ color: theme.primary }}>
+													Investment Highlights
+												</h4>
+												<div className="grid md:grid-cols-3 gap-4">
+													<div className="text-center p-4 rounded-lg" style={{ backgroundColor: "rgba(255, 255, 255, 0.7)" }}>
+														<div className="text-3xl font-bold text-green-600">24%</div>
+														<div className="text-sm mt-1" style={{ color: theme.mutedForeground }}>Annual Return</div>
+													</div>
+													<div className="text-center p-4 rounded-lg" style={{ backgroundColor: "rgba(255, 255, 255, 0.7)" }}>
+														<div className="text-3xl font-bold text-green-600">73%</div>
+														<div className="text-sm mt-1" style={{ color: theme.mutedForeground }}>3-Year ROI</div>
+													</div>
+													<div className="text-center p-4 rounded-lg" style={{ backgroundColor: "rgba(255, 255, 255, 0.7)" }}>
+														<div className="text-3xl font-bold" style={{ color: theme.primary }}>$25,725</div>
+														<div className="text-sm mt-1" style={{ color: theme.mutedForeground }}>Annual Income</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</motion.div>
+								)}
+							</AnimatePresence>
+						</motion.div>
 					</div>
 
 					{/* ROI Trend Chart - Recharts Implementation */}
@@ -1347,6 +1742,212 @@ const SilverSeedLanding: React.FC = () => {
 							);
 						})}
 					</div>
+				</div>
+			</section>
+
+			{/* FAQ Section */}
+			<section
+				id="faq"
+				className="py-20 px-4 relative overflow-hidden"
+				style={{
+					backgroundImage: "url('/faq-bg.jpeg')",
+					backgroundSize: "cover",
+					backgroundPosition: "center",
+					backgroundAttachment: "fixed",
+				}}>
+				{/* Metallic Overlay with Theme Color */}
+				<div
+					className="absolute inset-0"
+					style={{
+						background: `linear-gradient(135deg, ${theme.primary}F0, ${theme.accent}E8, ${theme.primary}F0)`,
+						backdropFilter: "blur(2px)",
+					}}
+				/>
+
+				{/* Metallic Shine Effect */}
+				<div
+					className="absolute inset-0 opacity-20"
+					style={{
+						background: `
+							linear-gradient(
+								135deg,
+								transparent 0%,
+								rgba(255, 255, 255, 0.4) 25%,
+								transparent 50%,
+								rgba(255, 255, 255, 0.3) 75%,
+								transparent 100%
+							)
+						`,
+						backgroundSize: "200% 200%",
+						animation: "shimmer 8s ease-in-out infinite",
+					}}
+				/>
+
+				<style jsx>{`
+					@keyframes shimmer {
+						0%, 100% { background-position: 0% 0%; }
+						50% { background-position: 100% 100%; }
+					}
+				`}</style>
+
+				<div className="max-w-5xl mx-auto relative z-10">
+					<motion.div className="text-center mb-16" {...fadeInUp}>
+						<div className="flex items-center justify-center gap-3 mb-4">
+							<div
+								className="p-3 rounded-full shadow-lg"
+								style={{
+									backgroundColor: "rgba(255, 255, 255, 0.95)",
+									boxShadow: `0 0 30px ${theme.primary}80`,
+								}}>
+								<HelpCircle
+									className="h-12 w-12"
+									style={{ color: theme.primary }}
+								/>
+							</div>
+							<h2
+								className="text-4xl md:text-5xl font-bold drop-shadow-lg"
+								style={{
+									color: "#ffffff",
+									textShadow: `2px 2px 4px rgba(0,0,0,0.3), 0 0 20px ${theme.primary}60`,
+								}}>
+								{siteData.faq.title}
+							</h2>
+						</div>
+						<p
+							className="text-xl max-w-3xl mx-auto font-medium drop-shadow-md"
+							style={{
+								color: "#ffffff",
+								textShadow: "1px 1px 3px rgba(0,0,0,0.4)",
+							}}>
+							{siteData.faq.subtitle}
+						</p>
+					</motion.div>
+
+					{/* FAQ Categories */}
+					<div className="space-y-8">
+						{siteData.faq.categories.map((category, catIndex) => (
+							<motion.div
+								key={category.category}
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true }}
+								transition={{ delay: catIndex * 0.1 }}>
+								{/* Category Title */}
+								<h3
+									className="text-2xl font-bold mb-6 pb-3 border-b-2 drop-shadow-md"
+									style={{
+										borderColor: "rgba(255, 255, 255, 0.6)",
+										color: "#ffffff",
+										textShadow: "1px 1px 3px rgba(0,0,0,0.4)",
+									}}>
+									{category.category}
+								</h3>
+
+								{/* Questions in Category */}
+								<div className="space-y-4">
+									{category.questions.map((faq, index) => {
+										const faqId = `${category.category}-${index}`;
+										const isExpanded = expandedFAQ === faqId;
+
+										return (
+											<motion.div
+												key={faqId}
+												className="rounded-xl border-2 overflow-hidden transition-all shadow-lg hover:shadow-2xl"
+												style={{
+													backgroundColor: "rgba(255, 255, 255, 0.95)",
+													borderColor: isExpanded ? "#ffffff" : "rgba(255, 255, 255, 0.4)",
+													backdropFilter: "blur(10px)",
+													boxShadow: isExpanded
+														? `0 8px 32px ${theme.primary}60, inset 0 0 20px rgba(255,255,255,0.5)`
+														: "0 4px 16px rgba(0,0,0,0.2)",
+												}}>
+												{/* Question Button */}
+												<button
+													onClick={() =>
+														setExpandedFAQ(isExpanded ? null : faqId)
+													}
+													className="w-full p-6 flex items-center justify-between gap-4 text-left hover:opacity-80 transition-opacity">
+													<span
+														className="text-lg font-semibold flex-1"
+														style={{ color: theme.primary }}>
+														{faq.question}
+													</span>
+													{isExpanded ? (
+														<ChevronUp
+															className="h-6 w-6 flex-shrink-0"
+															style={{ color: theme.primary }}
+														/>
+													) : (
+														<ChevronDown
+															className="h-6 w-6 flex-shrink-0"
+															style={{ color: theme.primary }}
+														/>
+													)}
+												</button>
+
+												{/* Answer */}
+												<AnimatePresence>
+													{isExpanded && (
+														<motion.div
+															initial={{ height: 0, opacity: 0 }}
+															animate={{ height: "auto", opacity: 1 }}
+															exit={{ height: 0, opacity: 0 }}
+															transition={{ duration: 0.3 }}
+															className="overflow-hidden">
+															<div
+																className="px-6 pb-6 pt-2 border-t"
+																style={{
+																	borderColor: `${theme.primary}30`,
+																	backgroundColor: "rgba(255, 255, 255, 0.5)",
+																}}>
+																<p
+																	className="text-base leading-relaxed"
+																	style={{ color: theme.foreground }}>
+																	{faq.answer}
+																</p>
+															</div>
+														</motion.div>
+													)}
+												</AnimatePresence>
+											</motion.div>
+										);
+									})}
+								</div>
+							</motion.div>
+						))}
+					</div>
+
+					{/* Still Have Questions CTA */}
+					<motion.div
+						{...fadeInUp}
+						className="mt-16 text-center rounded-2xl p-8 md:p-12 shadow-2xl"
+						style={{
+							backgroundColor: "rgba(255, 255, 255, 0.95)",
+							border: "2px solid rgba(255, 255, 255, 0.6)",
+							backdropFilter: "blur(10px)",
+							boxShadow: `0 8px 32px ${theme.primary}60, inset 0 0 20px rgba(255,255,255,0.5)`,
+						}}>
+						<h3
+							className="text-2xl md:text-3xl font-bold mb-4"
+							style={{ color: theme.primary }}>
+							Still Have Questions?
+						</h3>
+						<p
+							className="text-lg mb-6 max-w-2xl mx-auto"
+							style={{ color: theme.foreground }}>
+							Our team is here to help! Schedule a free consultation to discuss
+							your investment goals and get personalized answers.
+						</p>
+						<button
+							onClick={() => setShowCalendar(true)}
+							className="px-8 py-4 rounded-xl font-bold text-lg text-white hover:scale-105 transition-all shadow-lg hover:shadow-2xl"
+							style={{
+								backgroundColor: theme.primary,
+								boxShadow: `0 4px 20px ${theme.primary}60`,
+							}}>
+							Schedule Free Consultation
+						</button>
+					</motion.div>
 				</div>
 			</section>
 

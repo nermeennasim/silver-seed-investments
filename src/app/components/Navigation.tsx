@@ -31,8 +31,10 @@ const Navigation: React.FC<NavigationProps> = ({
 			label: "About",
 			subItems: [
 				{ id: "about", label: "About Us" },
+				{ id: "gallery", label: "Gallery" },
 				{ id: "how-we-work", label: "How We Work" },
 				{ id: "team", label: "Our Team" },
+				{ id: "faq", label: "FAQ" },
 			],
 		},
 		{

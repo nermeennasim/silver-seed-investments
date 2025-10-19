@@ -8,6 +8,7 @@ export default function LoadingScreen() {
 	const [progress, setProgress] = useState(0);
 	const [roi, setRoi] = useState(20);
 	const [isLoading, setIsLoading] = useState(true);
+	const [mounted, setMounted] = useState(false);
 
 	// Generate random positions once to avoid hydration mismatch
 	const backgroundShapes = useMemo(() => {
@@ -17,6 +18,10 @@ export default function LoadingScreen() {
 			duration: 3 + Math.random() * 2,
 			delay: Math.random() * 2,
 		}));
+	}, []);
+
+	useEffect(() => {
+		setMounted(true);
 	}, []);
 
 	useEffect(() => {
@@ -48,6 +53,11 @@ export default function LoadingScreen() {
 			clearInterval(roiInterval);
 		};
 	}, []);
+
+	// Don't render until mounted on client to avoid hydration mismatch
+	if (!mounted) {
+		return null;
+	}
 
 	return (
 		<AnimatePresence>
