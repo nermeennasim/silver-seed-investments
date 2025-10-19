@@ -1999,6 +1999,7 @@ const SilverSeedLanding: React.FC = () => {
 
 							{/* WhatsApp */}
 							<a
+								href="https://wa.me/13652926333"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="flex flex-col items-center text-center p-8 rounded-2xl hover:scale-105 transition-all group"
